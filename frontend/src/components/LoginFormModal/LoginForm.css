@@ -1,0 +1,110 @@
+.login-modal {
+    width: 568px;
+    height: 568px;
+    border-radius: 10px;
+}
+
+.login-header {
+    width: 100%;
+    height: 64px;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px grey solid;
+}
+
+.login-welcome-text h3 {
+    padding-left: 5%;
+    font-size: 22px;
+}
+
+.login-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form form {
+    width: 100%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.login-form input {
+    width: 100%;
+    height: 50px;
+}
+
+.login-submit-button-div {
+    margin-top: 5%;
+}
+
+.login-submit-button-div button {
+    width: 102%;
+    height: 40px;
+    border: 0;
+    border-radius: 9px;
+    color: white;
+    background-color: red;
+}
+
+.login-submit-button-div .disabled {
+    width: 102%;
+    height: 40px;
+    border: 0;
+    border-radius: 9px;
+    color: black;
+    background-color: grey;
+}
+
+.orline-divider {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 16px 0px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    margin-top: 25px;
+}
+
+.or-word {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2px;
+}
+
+.div-line-1 {
+    content: "fdf";
+    flex: 1 1;
+    border-bottom: 1px solid #bababa;
+    margin: auto;
+    margin: 0 17px 0 30px;
+}
+
+.div-line-2 {
+    content: "fdf";
+    flex: 1 1;
+    border-bottom: 1px solid #bababa;
+    margin: auto;
+    margin: 0 30px 0 17px;
+}
+
+.login-all-items {
+    width: 100%;
+}
+
+.login-all-items button{
+    cursor: pointer;
+    max-width: 91%;
+    margin-left: 5%;
+    /* margin-right: 5%; */
+}
+
+.demouser {
+    width: 100%;
+    height: 40px;
+    border: 1px solid black;
+    border-radius: 9px;
+    color: black;
+    background-color: white;
+}
