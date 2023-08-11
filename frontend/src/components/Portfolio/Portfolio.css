@@ -1,0 +1,162 @@
+.portfolio-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.portfolio-detail {
+    display: flex;
+    justify-content: center;
+    max-width: 1200px;
+    /* min-width: 1000px; */
+    width: 100%;
+    padding-top: 3%;
+}
+
+.portfolio-main {
+    width: 75%;
+}
+
+.portfolio-sidebar {
+    width: 25%;
+}
+
+.navbar {
+    width: 100%;
+}
+
+.portfolio-line-chart {
+    width: 100%;
+}
+
+.portfolio-buyingpower-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: #3b4754 1px solid;
+    height: 80px;
+}
+
+.portfolio-buyingpower-wrapper:hover {
+    background-color: #31363A;
+    cursor: pointer;
+}
+
+.portfolio-buyingpower-detail-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 150px;
+}
+
+.portfolio-buyingpower-detail {
+    width: 50%;
+}
+
+.portfolio-buyingpower-brokerage {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 10px;
+}
+
+.portfolio-buyingpower-total {
+    display: flex;
+    padding-top: 5px;
+    border-top: #31363A solid 1px !important;
+    justify-content: space-between;
+    padding-bottom: 10px;
+}
+
+.portfolio-buyingpower-total div {
+    font-weight: bold;
+}
+
+.portfolio-trasferbutton-wrapper {
+    display: flex;
+    justify-content: space-around;
+}
+
+.portfolio-trasferbutton-wrapper button {
+    width: 50%;
+    height: 40px;
+    border-radius: 20px;
+}
+
+.portfolio-sidebar {
+    border: #42494B 1px solid;
+    margin-left: 2%;
+    background-color: #1E2021;
+    border-radius: 3px;
+}
+
+.investments-header-wrapper {
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: #42494B 1px solid;
+}
+
+.watchlists-header-wrapper {
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: #42494B 1px solid;
+}
+
+.investments-list {
+    padding-top: 5px;
+    display: flex;
+    flex-direction: column;
+    border-bottom: #42494B 1px solid;
+}
+
+.watchlists-list {
+    padding-top: 5px;
+    display: flex;
+    flex-direction: column;
+    border-bottom: #42494B 1px solid;
+}
+
+.stock-list-item {
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1%;
+    padding-top: 1%;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+.watchlist-item {
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1%;
+    padding-top: 1%;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+.stock-list-item:hover {
+    cursor: pointer;
+    background-color: #42494B;
+}
+.stocklist-item-difference {
+    font-size: 15px;
+    display: flex;
+    justify-content: flex-end;
+    color: green;
+}
+
+@media (max-width: 1100px) {
+    .portfolio-sidebar {
+        display: none;
+    }
+}
+
+
