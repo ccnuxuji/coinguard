@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from "react";
 import * as sessionActions from "../../store/session";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from 'react-router-dom';
 import { useModal } from "../../context/Modal";
 import "./LoginForm.css";
 
 function LoginFormModal() {
     const dispatch = useDispatch();
+    const history = useHistory();
     const [credential, setCredential] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState({});
     const { closeModal } = useModal();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors({});
-        return dispatch(sessionActions.login({ credential, password }))
+        await dispatch(sessionActions.login({ credential, password }))
             .then(closeModal)
             .catch(async (res) => {
                 const data = await res.json();
@@ -22,12 +24,13 @@ function LoginFormModal() {
                     setErrors(data.errors);
                 }
             });
+        history.push(`/portfolio`);
     };
 
-    const loginDemoUser = (e) => {
+    const loginDemoUser = async (e) => {
         e.preventDefault();
         setErrors({});
-        return dispatch(sessionActions.login({
+        await dispatch(sessionActions.login({
             credential: 'DemoUser',
             password: 'password'
         })).then(closeModal)
@@ -37,6 +40,7 @@ function LoginFormModal() {
                     setErrors(data.errors);
                 }
             });
+        history.push(`/portfolio`);
     };
 
     useEffect(() => {
