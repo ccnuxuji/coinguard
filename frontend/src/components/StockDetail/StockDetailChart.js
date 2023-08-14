@@ -7,7 +7,7 @@ import { getStockHistoryData, thunkGetStockInterval } from "../../store/stock";
 
 function StockDetailChart({ stocksymbol, name }) {
     const data = useSelector(getStockHistoryData);
-    const [value, setValue] = useState(data ? data[data.length - 1]?.close : '');
+    const [value, setValue] = useState(data ? data[data.length - 1]?.close : 0);
     const [days, setDays] = useState(1);
     const dispatch = useDispatch();
     const text = { 1: "Today", 7: "Past week", 30: "Past month", 90: "Past 3 months", 365: "Past year" };
