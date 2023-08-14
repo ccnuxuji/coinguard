@@ -1,4 +1,5 @@
 const SET_STOCK = "stock/setSTOCK";
+const SET_STOCK7 = "stock/setSTOCK7";
 const SET_STOCK_DETAIL = "stock/setSTOCKDETAIL";
 const apiKey = process.env.REACT_APP_FMP_API_KEY;
 
@@ -10,6 +11,13 @@ const setStockHistory = (stockhistorydata) => {
     };
 };
 
+const setStockHistory7 = (stockhistorydata7) => {
+    return {
+        type: SET_STOCK7,
+        payload: stockhistorydata7,
+    };
+};
+
 const setStockDetail = (stockdetaildata) => {
     return {
         type: SET_STOCK_DETAIL,
@@ -18,9 +26,9 @@ const setStockDetail = (stockdetaildata) => {
 };
 
 /*******************************thunks***************************** */
-export const thunkGetStockInterval = (timeInterval) => async (dispatch) => {
+export const thunkGetStockInterval = (timeInterval, stockSymbol) => async (dispatch) => {
     const response = await fetch(
-        `https://financialmodelingprep.com/api/v3/historical-chart/${timeInterval}/AAPL?apikey=${apiKey}`,
+        `https://financialmodelingprep.com/api/v3/historical-chart/${timeInterval}/${stockSymbol}?apikey=${apiKey}`,
         {
             method: "GET"
         }
@@ -36,14 +44,16 @@ export const thunkGetStockInterval = (timeInterval) => async (dispatch) => {
                 return currenttime.getDate() === tmpDate.getDate();
             }
         }).reverse();
+        const newdata7 = data?.slice(0, 547).reverse();
         dispatch(setStockHistory(newdata));
+        dispatch(setStockHistory7(newdata7));
     }
     return response;
 };
 
-export const thunkGetCompanyInformation = () => async (dispatch) => {
+export const thunkGetCompanyInformation = (stockSymbol) => async (dispatch) => {
     const response = await fetch(
-        `https://financialmodelingprep.com/api/v3/profile/AAPL?apikey=${apiKey}`,
+        `https://financialmodelingprep.com/api/v3/profile/${stockSymbol}?apikey=${apiKey}`,
         {
             method: "GET"
         }
@@ -57,10 +67,11 @@ export const thunkGetCompanyInformation = () => async (dispatch) => {
 
 /*******************************selectors**************************** */
 export const getStockHistoryData = (state) => state.stock.historydata;
+export const getStockHistoryData7 = (state) => state.stock.historydata7;
 export const getStockDetailData = (state) => state.stock.stockdetail;
 
 /******************************reducers***************************** */
-const initialState = { historydata: [], stockdetail: {} };
+const initialState = { historydata: [], stockdetail: {}, historydata7: [] };
 
 const stockReducer = (state = initialState, action) => {
     let newState;
@@ -68,6 +79,10 @@ const stockReducer = (state = initialState, action) => {
         case SET_STOCK:
             newState = { ...state };
             newState.historydata = action.payload
+            return newState;
+        case SET_STOCK7:
+            newState = { ...state };
+            newState.historydata7 = action.payload
             return newState;
         case SET_STOCK_DETAIL:
             newState = { ...state };

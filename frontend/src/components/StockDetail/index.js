@@ -69,7 +69,7 @@ function StockDetail({ isLoaded }) {
     }
 
     useEffect(() => {
-        dispatch(thunkGetCompanyInformation());
+        dispatch(thunkGetCompanyInformation(stocksymbol));
         dispatch(thunkGetPortfolio());
     }, [dispatch]);
 
@@ -132,7 +132,7 @@ function StockDetail({ isLoaded }) {
                                         </div>
                                     </form>
                                     <div className="order-buying-power">
-                                        <div>${portfolio?.cashValue.toFixed(2)} buying power available</div>
+                                        <div>${Number(portfolio?.cashValue).toFixed(2)} buying power available</div>
                                     </div>
                                 </div>
                             )}
