@@ -1,6 +1,7 @@
 import { thunkGetPortfolio, getportfolio } from "../../store/portfolio";
 import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
 import { useEffect, useState } from "react";
+import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import Navigation from "../Navigation";
 import StockLineChart from "../StockLineChart"
@@ -22,9 +23,7 @@ function Portfolio({ isLoaded }) {
     useEffect(() => {
         dispatch(thunkGetPortfolio());
         dispatch(thunkGetWatchlists());
-    }, [dispatch]);
-
-
+    }, []);
 
     return (
         <div className="portfolio-wrapper">
@@ -84,7 +83,7 @@ function Portfolio({ isLoaded }) {
                     <div className="investments-list">
                         {
                             portfolio?.Investments.map(investment => (
-                                <div className="stock-list-item" key={investment.id}>
+                                <Link className="stock-list-item" key={investment.id} to={`/stock/${investment.Stock.symbol}`}>
                                     <div className="stocklist-item-symbol">
                                         {investment.Stock.symbol}
                                     </div>
@@ -95,7 +94,7 @@ function Portfolio({ isLoaded }) {
                                         <div className="stocklist-item-price">$1276.55</div>
                                         <div className="stocklist-item-difference"><span>+0.11%</span></div>
                                     </div>
-                                </div>
+                                </Link>
                             ))
                         }
                     </div>

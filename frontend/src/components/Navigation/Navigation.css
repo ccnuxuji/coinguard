@@ -10,7 +10,32 @@
     padding-right: 5%;
     height: 80px;
     border-bottom: 1px solid black;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+}
+
+.login-signup-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-signup-buttons button {
+    cursor: pointer;
+    height: 50px;
+    width: 100px;
+    border-radius: 20px;
+    margin-right: 20px;
+    border: 1px solid rgb(255, 199, 87);
+}
+
+.home-login-button {
+    background-color: black;
+    color: rgb(255, 199, 87);
+}
+
+.home-signup-button {
+    background-color: rgb(255, 199, 87);
+    color: black;
 }
 
 .logo-img {
@@ -80,4 +105,16 @@
     border-color: grey;
     width: 100px;
     height: 40px;
+}
+
+.search-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-bar input {
+    width: 400px;
+    height: 35px;
+    background-color: black;
 }
