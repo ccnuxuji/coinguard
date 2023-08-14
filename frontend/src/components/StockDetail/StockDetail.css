@@ -1,0 +1,127 @@
+.stock-detail-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar {
+    width: 100%;
+}
+
+.stock-detail {
+    display: flex;
+    justify-content: center;
+    max-width: 1200px;
+    width: 100%;
+    padding-top: 3%;
+}
+
+.stock-detail-main {
+    width: 75%;
+}
+
+.stock-detail-sidebar {
+    width: 25%;
+}
+
+.stock-order-form-wrapper {
+    height: 480px;
+    width: 100%;
+    border: #42494B 1px solid;
+    background-color: #1E2021;
+}
+
+.stock-after-order-wrapper {
+    height: 330px;
+    width: 100%;
+    border: #42494B 1px solid;
+    background-color: #1E2021;
+}
+
+.order-form-title {
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-bottom: #42494B 1px solid;
+}
+
+.order-buying-power {
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-top: #42494B 1px solid;
+}
+
+.order-type {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.order-buy-title {
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.order-sell-title {
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buy-in {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.order-amount {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.order-market-price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    border-bottom: #42494B 1px solid;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.order-submit-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+}
+
+.order-submit-wrapper button {
+    height: 40px;
+    width: 70%;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+

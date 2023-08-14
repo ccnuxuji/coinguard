@@ -1,3 +1,25 @@
+.signup-page-wrapper {
+    display: flex;
+}
+
+.signup-image-wrapper{
+    width: 50%;
+}
+
+.signup-image-wrapper img {
+    width: 100%;
+    height:  100vh;
+}
+
+.signup-form-wrapper {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+}
+
 .signUp-modal {
     width: 568px;
     height: 700px;
