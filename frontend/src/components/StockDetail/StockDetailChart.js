@@ -2,11 +2,13 @@ import "./StockDetailChart.css";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { LineChart, Line, Tooltip, ResponsiveContainer, XAxis, YAxis } from 'recharts';
-import { getStockHistoryData, thunkGetStockInterval } from "../../store/stock";
+import { getStockHistoryData, getStockHistoryData7, thunkGetStockInterval } from "../../store/stock";
 
 
 function StockDetailChart({ stocksymbol, name }) {
-    const data = useSelector(getStockHistoryData);
+    const data1 = useSelector(getStockHistoryData);
+    const data7 = useSelector(getStockHistoryData7);
+    const [data, setData] = useState(data1);
     const [value, setValue] = useState(data ? data[data.length - 1]?.close : 0);
     const [days, setDays] = useState(1);
     const dispatch = useDispatch();
@@ -38,7 +40,7 @@ function StockDetailChart({ stocksymbol, name }) {
     }
 
     useEffect(() => {
-        dispatch(thunkGetStockInterval(timeInterval[days]))
+        dispatch(thunkGetStockInterval(timeInterval[days], stocksymbol))
         .then(setValue(data[data.length - 1]?.close));
     }, [dispatch]);
 
@@ -59,7 +61,7 @@ function StockDetailChart({ stocksymbol, name }) {
 
             <LineChart data={data} width={880} height={500} onMouseLeave={onMouseLeaveHandler}>
                 <XAxis dataKey="date"
-                    // padding={{ right: 881 * (288 - data?.length) / 288 }}
+                    // padding={days === 1? { right: 881 * (78 - data?.length) / 78} : 0}
                     tick={false} hide={true} />
                 <YAxis type="number" domain={['auto', 'auto']} tick={false} hide={true} />
                 <Tooltip content={<CustomTooltip />} />
@@ -70,8 +72,8 @@ function StockDetailChart({ stocksymbol, name }) {
 
             <div className="timeline__container">
                 <div className="timeline__buttons__container">
-                    <div className={`timeline__button ${days === 1 ? "active" : "" }`} onClick={() => setDays(1)}>1D</div>
-                    <div className={`timeline__button ${days === 7 ? "active" : "" }`} onClick={() => setDays(7)}>1W</div>
+                    <div className={`timeline__button ${days === 1 ? "active" : "" }`} onClick={() => {setDays(1); setData(data1)}}>1D</div>
+                    <div className={`timeline__button ${days === 7 ? "active" : "" }`} onClick={() => {setDays(7); setData(data7)}}>1W</div>
                     <div className={`timeline__button ${days === 30 ? "active" : "" }`} onClick={() => setDays(30)}>1M</div>
                     <div className={`timeline__button ${days === 90 ? "active" : "" }`} onClick={() => setDays(90)}>3M</div>
                     <div className={`timeline__button ${days === 365 ? "active" : "" }`} onClick={() => setDays(365)}>1Y</div>
