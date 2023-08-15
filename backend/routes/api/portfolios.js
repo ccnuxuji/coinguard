@@ -32,7 +32,7 @@ router.get(
             ]
         });
 
-        // portfolio = portfolio.toJSON();
+        portfolio = portfolio.toJSON();
         portfolio.dataToday = [];
         const tmp = new Date();
         tmp.setHours(-7);
@@ -53,6 +53,7 @@ router.get(
             tmp.setMinutes(tmp.getMinutes() + 5)
         }
         portfolio.numPoints = portfolio.dataToday.length;
+        portfolio.cashValue = parseFloat(portfolio.cashValue);
         res.json(portfolio);
     }
 );
