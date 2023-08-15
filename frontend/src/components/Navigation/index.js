@@ -31,7 +31,7 @@ function Navigation({ isLoaded }) {
             {sessionUser && (
                 <div className='search-bar'>
                     <form>
-                        <input type="text" id="search" name="search" placeholder="Search..." />
+                        <input type="text" id="search" name="search" placeholder="Coming soon..." />
                     </form>
                 </div>
             )}

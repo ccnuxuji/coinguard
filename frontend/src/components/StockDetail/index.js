@@ -8,6 +8,8 @@ import { thunkGetCompanyInformation, getStockDetailData } from "../../store/stoc
 import "./StockDetail.css"
 import { thunkBuyStock, thunkSellStock } from "../../store/order";
 import { getportfolio, thunkGetPortfolio } from "../../store/portfolio";
+import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
+import AddToListModal from "../AddToListModal";
 
 function StockDetail({ isLoaded }) {
     const { stocksymbol } = useParams();
@@ -22,6 +24,7 @@ function StockDetail({ isLoaded }) {
     const [sidebar, setSidebar] = useState("before-order");
     const [orderType, setOrderType] = useState("buy");
     const [order, setOrder] = useState("");
+    const [sellTitleClass, setSellTitleClass] = useState("buy");
 
     const handleBuySubmit = async (e) => {
         e.preventDefault();
@@ -44,7 +47,6 @@ function StockDetail({ isLoaded }) {
         };
         const sellorder = await dispatch(thunkSellStock(order_to_be_submit))
             .then(setSidebar("after-order"));
-            console.log(sellorder)
         setOrder(sellorder);
         if (!order.investment) {
             setOrderType("buy");
@@ -62,16 +64,23 @@ function StockDetail({ isLoaded }) {
 
     const handleClickBuyTitle = (e) => {
         setOrderType("buy");
+        setSellTitleClass("buy");
     }
 
     const handleClickSellTitle = (e) => {
         setOrderType("sell");
+        setSellTitleClass("sell");
     }
 
     useEffect(() => {
-        dispatch(thunkGetCompanyInformation(stocksymbol));
+        dispatch(thunkGetCompanyInformation(stocksymbol))
+            .then(setCurrentPrice(Object.keys(stockDetail).length !== 0 ? stockDetail.price : 100));
         dispatch(thunkGetPortfolio());
     }, [dispatch]);
+
+    useEffect(() => {
+        setCurrentPrice(Object.keys(stockDetail).length !== 0 ? stockDetail.price : 100);
+    }, [stockDetail]);
 
     return (
         <div className="stock-detail-wrapper">
@@ -81,17 +90,21 @@ function StockDetail({ isLoaded }) {
             <div className="stock-detail">
                 <div className="stock-detail-main">
                     <StockDetailChart stocksymbol={stocksymbol} name={stockDetail.companyName} />
+                    <div className="stock-about-wrapper">
+                        <h1>About</h1>
+                        <p>{stockDetail.description}</p>
+                    </div>
                 </div>
 
                 <div className="stock-detail-sidebar">
                     {sidebar === "before-order" && (
                         <div className="stock-order-form-wrapper">
                             <div className="order-form-title">
-                                <div className="order-buy-title" onClick={handleClickBuyTitle}>
+                                <div id="order-buy-title" className={sellTitleClass === "buy" ? "active-green" : ""} onClick={handleClickBuyTitle}>
                                     <span>Buy {stockDetail.symbol}</span>
                                 </div>
                                 {investment && (
-                                    <div className="order-sell-title" onClick={handleClickSellTitle}>
+                                    <div id="order-sell-title" className={sellTitleClass === "sell" ? "active-green" : ""} onClick={handleClickSellTitle}>
                                         <span>Sell {stockDetail.symbol}</span>
                                     </div>
                                 )}
@@ -125,14 +138,17 @@ function StockDetail({ isLoaded }) {
                                         </div>
                                         <div className="order-market-price">
                                             <div>Estimated Cost</div>
-                                            <div>${currentPrice * shares}</div>
+                                            <div>${(currentPrice * shares)?.toFixed(2)}</div>
                                         </div>
                                         <div className="order-submit-wrapper">
-                                            <button>Review Order</button>
+                                            <button
+                                                className={((currentPrice * shares > portfolio?.cashValue) || shares) <= 0 ? "disabled" : ""}
+                                                type="submit"
+                                                disabled={(currentPrice * shares > portfolio?.cashValue) || shares <= 0}>Review Order</button>
                                         </div>
                                     </form>
                                     <div className="order-buying-power">
-                                        <div>${Number(portfolio?.cashValue).toFixed(2)} buying power available</div>
+                                        <div>${Number(portfolio?.cashValue)?.toFixed(2)} buying power available</div>
                                     </div>
                                 </div>
                             )}
@@ -152,13 +168,17 @@ function StockDetail({ isLoaded }) {
                                         </div>
                                         <div className="order-amount">
                                             <label htmlFor="orderamount">Shares</label>
-                                            <input id="orderamount"
-                                                type="number"
-                                                value={shares}
-                                                onChange={(e) => setShares(parseFloat(e.target.value))}
-                                                placeholder="0"
-                                                required
-                                            />
+                                            <div>
+                                                <div className="sell-all" onClick={() => setShares(investment?.numShares)}>Sell all</div>
+                                                <input id="orderamount"
+                                                    type="number"
+                                                    value={shares}
+                                                    onChange={(e) => setShares(parseFloat(e.target.value))}
+                                                    placeholder="0"
+                                                    required
+                                                />
+                                            </div>
+
                                         </div>
                                         <div className="order-market-price">
                                             <div>Market Price</div>
@@ -166,14 +186,17 @@ function StockDetail({ isLoaded }) {
                                         </div>
                                         <div className="order-market-price">
                                             <div>Estimated Cost</div>
-                                            <div>${currentPrice * shares}</div>
+                                            <div>${(currentPrice * shares)?.toFixed(2)}</div>
                                         </div>
                                         <div className="order-submit-wrapper">
-                                            <button>Review Order</button>
+                                            <button
+                                                className={((investment?.numShares < shares) || shares) <= 0 ? "disabled" : ""}
+                                                type="submit"
+                                                disabled={(investment?.numShares < shares) || shares <= 0}>Review Order</button>
                                         </div>
                                     </form>
                                     <div className="order-buying-power">
-                                        <div>${investment?.numShares} shares available</div>
+                                        <div>{(investment?.numShares)?.toFixed(2)} shares available</div>
                                     </div>
                                 </div>
                             )}
@@ -193,11 +216,11 @@ function StockDetail({ isLoaded }) {
                             </div>
                             <div className="order-form-title">
                                 <div> Order amount:</div>
-                                <div> {order?.order?.numShares * order?.order?.marketPrice}</div>
+                                <div> {(order?.order?.numShares * order?.order?.marketPrice)?.toFixed(2)}</div>
                             </div>
                             <div className="order-form-title">
                                 <div> Number of shares:</div>
-                                <div> {order?.order?.numShares}</div>
+                                <div> {(order?.order?.numShares)?.toFixed(2)}</div>
                             </div>
                             <div className="order-submit-wrapper">
                                 <button onClick={handleDoneClick}>Done</button>
@@ -207,7 +230,11 @@ function StockDetail({ isLoaded }) {
 
                     {sidebar === "before-order" && (
                         <div className="order-submit-wrapper">
-                            <button onClick={handleAddtolistsClick}>Add to Lists</button>
+                            <OpenModalMenuItem
+                                itemType="button"
+                                itemText="Add to Lists"
+                                modalComponent={<AddToListModal symbol={stocksymbol} />}
+                            />
                         </div>
                     )}
 

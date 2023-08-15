@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 import "./TransferFormModal.css";
 import { useModal } from "../../context/Modal";
-import { thunkWithdrawMoney } from "../../store/portfolio";
+import { getportfolio, thunkWithdrawMoney } from "../../store/portfolio";
+import { useDispatch, useSelector } from "react-redux";
+
 
 function WithdrawModal() {
     const dispatch = useDispatch();
     const { closeModal } = useModal();
     const [amount, setAmount] = useState("");
     const [errors, setErrors] = useState({});
+    const portfolio = useSelector(getportfolio);
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -62,10 +65,11 @@ function WithdrawModal() {
                         <p>{errors.amount}</p>
                     )}
                     <div className="deposit-submit-button-div">
+                        <div className="daily-transfer-limit">Avaliable balance is ${portfolio?.cashValue.toFixed(2)}</div>
                         <button
-                            className={(amount < 1 || amount > 50000) ? "disabled" : ""}
+                            className={(amount < 1 || amount > portfolio?.cashValue) ? "disabled" : ""}
                             type="submit"
-                            disabled={amount < 1 || amount > 50000}
+                            disabled={amount < 1 || amount > portfolio?.cashValue}
                         >Review transfer</button>
                     </div>
                 </form>

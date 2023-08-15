@@ -81,6 +81,11 @@
     width: 50%;
     height: 40px;
     border-radius: 20px;
+    cursor: pointer;
+}
+
+.portfolio-trasferbutton-wrapper button:hover {
+    background-color: green;
 }
 
 .portfolio-sidebar {
@@ -101,7 +106,9 @@
 .watchlists-header-wrapper {
     height: 50px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    padding-left: 2%;
+    padding-right: 2%;
     align-items: center;
     border-bottom: #42494B 1px solid;
 }
@@ -128,12 +135,13 @@
     padding-bottom: 1%;
     padding-top: 1%;
     padding-left: 2%;
-    padding-right: 2%;
+    padding-right: 5%;
     text-decoration: none;
     color: white;
 }
 
-.watchlist-item {
+.watch-list-item {
+    width: 90%;
     height: 50px;
     display: flex;
     justify-content: space-between;
@@ -141,7 +149,46 @@
     padding-bottom: 1%;
     padding-top: 1%;
     padding-left: 2%;
+    padding-right: 5%;
+    text-decoration: none;
+    color: white;
+}
+
+.watch-list-item:hover {
+    cursor: pointer;
+    background-color: #42494B;
+}
+
+.watchlist-name {
+    width: 95%;
+    /* border-bottom: red solid 1px; */
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 3%;
+}
+
+.watchlist-item {
+    /* height: 50px; */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1%;
+    padding-top: 1%;
+    padding-left: 2%;
     padding-right: 2%;
+}
+
+.watchlist-edit svg{
+    fill: white;
+    padding-right: 5px;
+}
+
+.watchlist-edit {
+    display: flex;
 }
 
 .stock-list-item:hover {
@@ -161,4 +208,13 @@
     }
 }
 
+.plus-svg-wrapper svg {
+    fill: white;
+}
+
+.plus-svg-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 

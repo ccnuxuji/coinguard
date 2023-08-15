@@ -21,7 +21,8 @@ module.exports = (sequelize, DataTypes) => {
         models.Watchlist,
           { through: models.WatchlistStock,
             foreignKey: 'stockId',
-            otherKey: 'watchlistId'
+            otherKey: 'watchlistId',
+            hooks: true
           }
       );
     }

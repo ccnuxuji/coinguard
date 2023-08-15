@@ -44,7 +44,7 @@ router.get(
             const hour = tmp.getUTCHours();
             const minute = tmp.getUTCMinutes();
             const formattedTime = `${hour}:${minute}`;
-            add += Math.round((Math.random() < 0.2 ? 1 : 0) * Math.random() * 50)
+            add += ((Math.random() < 0.2 ? 1 : 0) * Math.random() * 5);
             const obj = {
                 time: formattedTime,
                 totalAssets: add

@@ -23,7 +23,7 @@ router.post(
         }
 
         // check if the investment exist, if not, save it
-        let investment = await Investment.findOne({ where: { stockId: stock.id } });
+        let investment = await Investment.findOne({ where: { portfolioId: portfolio.id, stockId: stock.id } });
         if (!investment) {
             const investment_to_be_added = { portfolioId: portfolio.id, stockId: stock.id, numShares: 0, averageBuyingPrice: 0 };
             investment = await Investment.create(investment_to_be_added);

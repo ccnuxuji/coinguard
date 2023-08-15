@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { LineChart, Line, Tooltip, XAxis, YAxis } from 'recharts';
 
 function StockLineChart({ data }) {
-  const [value, setValue] = useState(data ? data[data.length - 1]?.totalAssets : '');
+  const [value, setValue] = useState(data ? data[data.length - 1]?.totalAssets : 0);
   const CustomTooltip = ({ active, payload, label }) => {
     useEffect(() => {
       if (active && payload && payload.length) {
@@ -16,7 +16,7 @@ function StockLineChart({ data }) {
       return (
         <div className="custom-tooltip">
           <p className="label">{`Time: ${label}`}</p>
-          <p className="label">{`Value: ${payload[0].value}`}</p>
+          <p className="label">{`Value: ${(payload[0].value).toFixed(2)}`}</p>
           {/* <p className="desc">Anything you want can be displayed here.</p> */}
         </div>
       );
@@ -42,8 +42,8 @@ function StockLineChart({ data }) {
   return (
     <>
       <div className="total-assets-wrapper">
-        <div className="total-assets">$ {value}</div>
-        <div>${value - data[0]?.totalAssets}({(value - data[0]?.totalAssets) / data[0]?.totalAssets}%)Past Year</div>
+        <div className={`total-assets`}>$ {value?.toFixed(2)}</div>
+        <div ><span className={`${(value - data[0]?.totalAssets) < 0 ? "defference-red" : "difference-green"}`}>${(value - data[0]?.totalAssets).toFixed(2)}({((value - data[0]?.totalAssets) / data[0]?.totalAssets).toFixed(2)}%)</span>Today</div>
       </div>
 
       <LineChart data={data} width={880} height={500} onMouseLeave={onMouseLeaveHandler}>
