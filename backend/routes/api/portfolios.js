@@ -32,7 +32,7 @@ router.get(
             ]
         });
 
-        portfolio = portfolio.toJSON();
+        // portfolio = portfolio.toJSON();
         portfolio.dataToday = [];
         const tmp = new Date();
         tmp.setHours(-7);
