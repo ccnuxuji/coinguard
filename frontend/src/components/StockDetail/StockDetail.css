@@ -68,18 +68,38 @@
     padding-right: 10px;
 }
 
-.order-buy-title {
+#order-buy-title {
     width: 40%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.order-sell-title {
+#order-sell-title {
     width: 40%;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#order-buy-title.active-green {
+    color: #5AC53B;
+    border-bottom: 2px solid #5AC53B;
+}
+
+#order-buy-title.active-red {
+    color: red;
+    border-bottom: 2px solid red;
+}
+
+#order-sell-title.active-green {
+    color: #5AC53B;
+    border-bottom: 2px solid #5AC53B;
+}
+
+#order-sell-title.active-red {
+    color: red;
+    border-bottom: 2px solid red;
 }
 
 .buy-in {
@@ -124,4 +144,37 @@
     cursor: pointer;
 }
 
+.stock-about-wrapper p{
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0 0 1em; /* Adds margin at the bottom for spacing between paragraphs */
+  padding: 0;
+  color: white; /* Text color */
+  text-align: justify; /* Align text to both left and right edges */
+  background-color: black; /* Background color */
+  /* border: 1px solid #ccc; Border for visual separation */
+}
+
+
+.disabled {
+    width: 60%;
+    height: 40px;
+    border: 0;
+    border-radius: 9px;
+    color: black;
+    background-color: grey;
+}
+
+
+.order-submit-wrapper button:hover {
+    background-color: #5AC53B;
+}
+
+.sell-all{
+    border: 1px solid grey;
+    background-color: antiquewhite;
+    color: black;
+    cursor: pointer;
+}
 

@@ -1,7 +1,7 @@
 
 .transfer-modal {
-    width: 568px;
-    height: 568px;
+    width: 668px;
+    height: 368px;
 }
 
 .transfer-header {
@@ -16,7 +16,7 @@
 }
 
 .transfer-form form {
-    width: 100%;
+    width: 90%;
     /* padding-left: 5%;
     padding-right: 5%; */
 }
@@ -66,6 +66,8 @@
     margin-top: 5%;
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .deposit-submit-button-div button {
@@ -92,4 +94,9 @@
     align-items: center;
     margin-bottom: 15px;
 
+}
+
+.daily-transfer-limit{
+    color: black;
+    font-size: smaller;
 }

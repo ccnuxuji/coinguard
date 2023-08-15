@@ -9,7 +9,16 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      
+      WatchlistStock.belongsTo(models.Watchlist, {
+        foreignKey: "watchlistId",
+        onDelete: 'CASCADE',
+        hooks: true
+      });
+      WatchlistStock.belongsTo(models.Stock, {
+        foreignKey: "stockId",
+        onDelete: 'CASCADE',
+        hooks: true
+      });
     }
   }
   WatchlistStock.init({

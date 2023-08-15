@@ -1,0 +1,36 @@
+.delete-button {
+    background-color: red;
+    margin-bottom: 5%;
+}
+
+.cancelDelete-button {
+    background-color: darkgray;
+}
+
+.delete-modal-wrapper {
+    width: 400px;
+    height: 300px;
+    border-radius: 10px;
+}
+
+.delete-modal-title {
+    display: flex;
+    justify-content: center;
+}
+
+.delete-modal-button-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.delete-modal-button-wrapper button {
+    width: 90%;
+    height: 50px;
+}
+
+.delete-confirm-text p {
+    padding-left: 5%;
+    color: black;
+}

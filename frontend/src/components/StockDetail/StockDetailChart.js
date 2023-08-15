@@ -9,10 +9,11 @@ function StockDetailChart({ stocksymbol, name }) {
     const data1 = useSelector(getStockHistoryData);
     const data7 = useSelector(getStockHistoryData7);
     const [data, setData] = useState(data1);
-    const [value, setValue] = useState(data ? data[data.length - 1]?.close : 0);
+    const [value, setValue] = useState(data ? data[data.length - 1]?.close : 100);
     const [days, setDays] = useState(1);
     const dispatch = useDispatch();
     const text = { 1: "Today", 7: "Past week", 30: "Past month", 90: "Past 3 months", 365: "Past year" };
+    const chooseData = { 1: data1, 7: data7 };
     const timeInterval = { 1: "5min" };
 
     const CustomTooltip = ({ active, payload, label }) => {
@@ -41,10 +42,16 @@ function StockDetailChart({ stocksymbol, name }) {
 
     useEffect(() => {
         dispatch(thunkGetStockInterval(timeInterval[days], stocksymbol))
-        .then(setValue(data[data.length - 1]?.close));
+            .then(setData(data1))
+            .then(setValue(data[data.length - 1]?.close));
     }, [dispatch]);
 
-    if (!data) {
+    useEffect(() => {
+        setData(chooseData[days]);
+        setValue(data[data.length - 1]?.close);
+    }, [days, data1]);
+
+    if (!data && !data1) {
         return null;
     }
 
@@ -61,22 +68,28 @@ function StockDetailChart({ stocksymbol, name }) {
 
             <LineChart data={data} width={880} height={500} onMouseLeave={onMouseLeaveHandler}>
                 <XAxis dataKey="date"
-                    // padding={days === 1? { right: 881 * (78 - data?.length) / 78} : 0}
+                    padding={{ right: (days === 1 ? (881 * (78 - data?.length) / 78) : 0) }}
                     tick={false} hide={true} />
                 <YAxis type="number" domain={['auto', 'auto']} tick={false} hide={true} />
                 <Tooltip content={<CustomTooltip />} />
-                <Line type="monotone" dataKey="close" stroke="rgb(0, 200, 5)" strokeWidth={2}
+                {/* "rgb(0, 200, 5)" */}
+                <Line type="monotone" dataKey="close" stroke={data[data.length - 1]?.close - data[0]?.close < 0 ? "rgb(255, 80, 0)" : "rgb(0, 200, 5)"} strokeWidth={2}
                     dot={{ stroke: 'rgb(0, 200, 5)', strokeWidth: 1, r: 0, strokeDasharray: '' }}
                 />
             </LineChart>
 
             <div className="timeline__container">
                 <div className="timeline__buttons__container">
-                    <div className={`timeline__button ${days === 1 ? "active" : "" }`} onClick={() => {setDays(1); setData(data1)}}>1D</div>
-                    <div className={`timeline__button ${days === 7 ? "active" : "" }`} onClick={() => {setDays(7); setData(data7)}}>1W</div>
-                    <div className={`timeline__button ${days === 30 ? "active" : "" }`} onClick={() => setDays(30)}>1M</div>
-                    <div className={`timeline__button ${days === 90 ? "active" : "" }`} onClick={() => setDays(90)}>3M</div>
-                    <div className={`timeline__button ${days === 365 ? "active" : "" }`} onClick={() => setDays(365)}>1Y</div>
+                    <div className={`timeline__button ${days === 1 ? (data[data.length - 1]?.close - data[0]?.close < 0 ? "active-red" : "active-green") : ""}`}
+                        onClick={() => { setDays(1); setData(data1) }}>1D</div>
+                    <div className={`timeline__button ${days === 7 ? (data[data.length - 1]?.close - data[0]?.close < 0 ? "active-red" : "active-green") : ""}`}
+                        onClick={() => { setDays(7); setData(data7) }}>1W</div>
+                    <div className={`timeline__button ${days === 30 ? (data[data.length - 1]?.close - data[0]?.close < 0 ? "active-red" : "active-green") : ""}`}
+                        onClick={() => setDays(30)}>1M</div>
+                    <div className={`timeline__button ${days === 90 ? (data[data.length - 1]?.close - data[0]?.close < 0 ? "active-red" : "active-green") : ""}`}
+                        onClick={() => setDays(90)}>3M</div>
+                    <div className={`timeline__button ${days === 365 ? (data[data.length - 1]?.close - data[0]?.close < 0 ? "active-red" : "active-green") : ""}`}
+                        onClick={() => setDays(365)}>1Y</div>
                 </div>
             </div>
 

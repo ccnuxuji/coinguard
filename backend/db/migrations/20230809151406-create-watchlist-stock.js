@@ -14,10 +14,20 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       watchlistId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
+        references: {
+          model: 'Watchlists',
+          key: 'id',
+        },
       },
       stockId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
+        references: {
+          model: 'Stocks',
+          key: 'id',
+        }
       },
       createdAt: {
         allowNull: false,

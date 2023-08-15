@@ -48,13 +48,16 @@
     border-bottom: 2px solid green; 
 }
 
-.timeline__button.active {
+.timeline__button.active-green {
     color: #5AC53B;
-}
-
-.timeline__button.active {
     border-bottom: 2px solid #5AC53B;
 }
+
+.timeline__button.active-red {
+    color: red;
+    border-bottom: 2px solid red;
+}
+
 
 #orderamount {
     width: 60px;

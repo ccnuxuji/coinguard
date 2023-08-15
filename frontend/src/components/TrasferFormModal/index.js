@@ -13,7 +13,7 @@ function TransferFormModal() {
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(thunkDepositMoney({ amount }))
-        .then(closeModal)
+        .then(closeModal())
     };
 
     useEffect(() => {
@@ -62,6 +62,7 @@ function TransferFormModal() {
                         <p>{errors.amount}</p>
                     )}
                     <div className="deposit-submit-button-div">
+                        <div className="daily-transfer-limit">Daily transfer limit is $50,000</div>
                         <button
                             className={(amount < 1 || amount > 50000) ? "disabled" : ""}
                             type="submit"
