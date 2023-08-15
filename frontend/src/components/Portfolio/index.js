@@ -52,7 +52,7 @@ function Portfolio({ isLoaded }) {
                         {!showBuyingPower && (
                             <div>Click here to add fund...</div>
                         )}
-                        <div className="portfolio-cashvalue">$ {(portfolio?.cashValue)?.toFixed(2)}</div>
+                        <div className="portfolio-cashvalue">$ {Number(portfolio?.cashValue)?.toFixed(2)}</div>
                     </div>
 
                     {showBuyingPower &&
