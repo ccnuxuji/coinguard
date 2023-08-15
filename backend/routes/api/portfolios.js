@@ -70,7 +70,7 @@ router.put(
                 userId
             }
         });
-        portfolio.set({ cashValue:  portfolio.cashValue + amount});
+        portfolio.set({ cashValue:  Number(portfolio.cashValue + amount)});
         await portfolio.save();
 
         const transaction_tobe_added = {
