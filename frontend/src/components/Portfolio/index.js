@@ -61,11 +61,11 @@ function Portfolio({ isLoaded }) {
                                 <div className="portfolio-buyingpower-detail">
                                     <div className="portfolio-buyingpower-brokerage">
                                         <div>Brokerage cash</div>
-                                        <div>$ {(portfolio?.cashValue).toFixed(2)}</div>
+                                        <div>$ {Number(portfolio?.cashValue)?.toFixed(2)}</div>
                                     </div>
                                     <div className="portfolio-buyingpower-total">
                                         <div>Total</div>
-                                        <div>$ {(portfolio?.cashValue.toFixed(2))}</div>
+                                        <div>$ {Number(portfolio?.cashValue)?.toFixed(2)}</div>
                                     </div>
                                     <div className="portfolio-trasferbutton-wrapper">
                                         <OpenModalMenuItem

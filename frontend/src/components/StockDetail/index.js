@@ -138,7 +138,7 @@ function StockDetail({ isLoaded }) {
                                         </div>
                                         <div className="order-market-price">
                                             <div>Estimated Cost</div>
-                                            <div>${(currentPrice * shares)?.toFixed(2)}</div>
+                                            <div>${Number(currentPrice * shares)?.toFixed(2)}</div>
                                         </div>
                                         <div className="order-submit-wrapper">
                                             <button
@@ -186,7 +186,7 @@ function StockDetail({ isLoaded }) {
                                         </div>
                                         <div className="order-market-price">
                                             <div>Estimated Cost</div>
-                                            <div>${(currentPrice * shares)?.toFixed(2)}</div>
+                                            <div>${Number(currentPrice * shares)?.toFixed(2)}</div>
                                         </div>
                                         <div className="order-submit-wrapper">
                                             <button
@@ -196,7 +196,7 @@ function StockDetail({ isLoaded }) {
                                         </div>
                                     </form>
                                     <div className="order-buying-power">
-                                        <div>{(investment?.numShares)?.toFixed(2)} shares available</div>
+                                        <div>{Number(investment?.numShares)?.toFixed(2)} shares available</div>
                                     </div>
                                 </div>
                             )}
@@ -216,7 +216,7 @@ function StockDetail({ isLoaded }) {
                             </div>
                             <div className="order-form-title">
                                 <div> Order amount:</div>
-                                <div> {(order?.order?.numShares * order?.order?.marketPrice)?.toFixed(2)}</div>
+                                <div> {Number(order?.order?.numShares * order?.order?.marketPrice)?.toFixed(2)}</div>
                             </div>
                             <div className="order-form-title">
                                 <div> Number of shares:</div>
