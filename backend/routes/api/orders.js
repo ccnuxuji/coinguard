@@ -86,7 +86,7 @@ router.put(
         }
 
         // update the portfolio
-        portfolio.set({cashValue: portfolio.cashValue + shares * sellingPrice});
+        portfolio.set({cashValue: Number(portfolio.cashValue) + Number(shares * sellingPrice)});
         await portfolio.save();
 
         // update the investment

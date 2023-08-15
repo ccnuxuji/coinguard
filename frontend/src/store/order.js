@@ -6,7 +6,7 @@ import {thunkGetPortfolio} from "./portfolio";
 
 /*******************************thunks***************************** */
 export const thunkBuyStock = (buyorder) => async (dispatch) => {
-    const response = await csrfFetch("/api/orders", {
+    const response = await csrfFetch("/api/orders/", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
@@ -21,7 +21,7 @@ export const thunkBuyStock = (buyorder) => async (dispatch) => {
 };
 
 export const thunkSellStock = (sellorder) => async (dispatch) => {
-    const response = await csrfFetch("/api/orders", {
+    const response = await csrfFetch("/api/orders/", {
         method: "PUT",
         bheaders: {
             'Content-Type': 'application/json'
