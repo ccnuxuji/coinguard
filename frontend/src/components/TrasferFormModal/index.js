@@ -33,9 +33,9 @@ function TransferFormModal() {
                         <label htmlFor="transfer-amount">Amount</label>
                         <input
                             id="transfer-amount"
-                            type="text"
+                            type="number"
                             value={amount}
-                            onChange={(e) => setAmount(e.target.value)}
+                            onChange={(e) => setAmount(Number(e.target.value))}
                             placeholder="$0.00"
                             required
                         />
