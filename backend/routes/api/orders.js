@@ -12,7 +12,7 @@ router.post(
     async (req, res, next) => {
         const userId = req.user.id;
         let { symbol, shares, buyingPrice } = req.body;
-        shares = parseFloat(shares);
+        shares = Number(shares);
 
         const portfolio = await Portfolio.findOne({ where: { userId } });
         // check if the stock exist, if not, save it
@@ -62,7 +62,7 @@ router.put(
     async (req, res, next) => {
         const userId = req.user.id;
         let { symbol, shares, sellingPrice } = req.body;
-        shares = parseFloat(shares);
+        shares = Number(shares);
         const portfolio = await Portfolio.findOne({ where: { userId } });
         let stock = await Stock.findOne({ where: { symbol } });
         let investment = await Investment.findOne({ where: { stockId: stock.id } });
