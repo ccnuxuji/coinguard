@@ -220,7 +220,7 @@ function StockDetail({ isLoaded }) {
                             </div>
                             <div className="order-form-title">
                                 <div> Number of shares:</div>
-                                <div> {(order?.order?.numShares)?.toFixed(2)}</div>
+                                <div> {Number(order?.order?.numShares)?.toFixed(2)}</div>
                             </div>
                             <div className="order-submit-wrapper">
                                 <button onClick={handleDoneClick}>Done</button>
