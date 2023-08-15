@@ -61,7 +61,7 @@ function StockDetailChart({ stocksymbol, name }) {
                 <div className="company-name">{name}</div>
                 <div className="total-assets">$ {value}</div>
                 <div>
-                    <span className={value - data[0]?.close < 0 ? "different-red" : "different-green"}>${(value - data[0]?.close).toFixed(2)}({((value - data[0]?.close) * 100 / data[0]?.close).toFixed(2)}%)</span>
+                    <span className={value - data[0]?.close < 0 ? "different-red" : "different-green"}>${Number(value - data[0]?.close)?.toFixed(2)}({Number((value - data[0]?.close) * 100 / data[0]?.close)?.toFixed(2)}%)</span>
                     <span>{text[days]}</span>
                 </div>
             </div>
