@@ -169,7 +169,7 @@ function StockDetail({ isLoaded }) {
                                         <div className="order-amount">
                                             <label htmlFor="orderamount">Shares</label>
                                             <div>
-                                                <div className="sell-all" onClick={() => setShares(investment?.numShares)}>Sell all</div>
+                                                <div className="sell-all" onClick={() => setShares(Number(investment?.numShares))}>Sell all</div>
                                                 <input id="orderamount"
                                                     type="number"
                                                     value={shares}

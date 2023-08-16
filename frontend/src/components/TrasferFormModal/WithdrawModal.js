@@ -67,9 +67,9 @@ function WithdrawModal() {
                     <div className="deposit-submit-button-div">
                         <div className="daily-transfer-limit">Avaliable balance is ${Number(portfolio?.cashValue).toFixed(2)}</div>
                         <button
-                            className={(amount < 1 || amount > portfolio?.cashValue) ? "disabled" : ""}
+                            className={(amount < 1 || amount > Number(portfolio?.cashValue)) ? "disabled" : ""}
                             type="submit"
-                            disabled={amount < 1 || amount > portfolio?.cashValue}
+                            disabled={amount < 1 || amount > Number(portfolio?.cashValue)}
                         >Review transfer</button>
                     </div>
                 </form>
