@@ -182,6 +182,19 @@
     padding-right: 2%;
 }
 
+.watchlist-name:hover {
+    cursor: pointer;
+    background-color: #42494B;
+}
+
+.plus-svg-wrapper {
+    cursor: pointer;
+}
+
+.plus-svg-wrapper:hover {
+    background-color: #42494B;
+}
+
 .watchlist-edit svg{
     fill: white;
     padding-right: 5px;
