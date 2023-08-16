@@ -10,9 +10,10 @@ function LandingPage({ isLoaded }) {
     const sessionUser = useSelector(state => state.session.user);
 
     useEffect(() => {
-        if (!isLoaded && !sessionUser) {
-            history.push('/portfolio');
-        }
+        // if (isLoaded && sessionUser) {
+        //     console.log("I am here!")
+        //     history.push('/portfolio');
+        // }
     }, [isLoaded]);
 
     return (

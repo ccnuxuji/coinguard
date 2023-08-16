@@ -114,6 +114,7 @@
 }
 
 .search-bar input {
+    color: white;
     width: 400px;
     height: 35px;
     background-color: black;

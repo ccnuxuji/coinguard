@@ -12,8 +12,10 @@ import WithdrawModal from "../TrasferFormModal/WithdrawModal";
 import WatchlistFormModal from "../WatchlistFormModal";
 import WatchlistEditModal from "../WatchlistFormModal/WatchlistEditModal";
 import WatchlistDeleteModal from "../WatchlistFormModal/WatchlistDeleteModal";
+import { useHistory } from "react-router-dom";
 
 function Portfolio({ isLoaded }) {
+    const history = useHistory();
     const dispatch = useDispatch();
     const portfolio = useSelector(getportfolio);
     const watchlists = useSelector(getWatchlists);
@@ -86,6 +88,20 @@ function Portfolio({ isLoaded }) {
                         )
                     }
 
+                    <div className="stock-recomendation-wrapper">
+                        <div className="stock-recomendation-title">
+                            <h3>Find some interesting stocks here:</h3>
+                        </div>
+                        <div className="stock-recomendation-list">
+                            <div onClick={() => history.push("/stock/AAPL")}>AAPL</div>
+                            <div onClick={() => history.push("/stock/GOOGL")}>GOOGL</div>
+                            <div onClick={() => history.push("/stock/TGT")}>TGT</div>
+                            <div onClick={() => history.push("/stock/APP")}>APP</div>
+                            <div onClick={() => history.push("/stock/CATC")}>CATC</div>
+                            <div onClick={() => history.push("/stock/PEGY")}>PEGY</div>
+                        </div>
+                    </div>
+
                 </div>
                 <div className="portfolio-sidebar">
                     <div className="investments-header-wrapper">
@@ -94,6 +110,9 @@ function Portfolio({ isLoaded }) {
                         </div>
                     </div>
                     <div className="investments-list">
+                        { portfolio?.Investments.length === 0 && (
+                            <div className="empty-investments">Find some stocks to buy...</div>
+                        )}
                         {
                             portfolio?.Investments.map(investment => (
                                 <Link className="stock-list-item" key={investment.id} to={`/stock/${investment.Stock.symbol}`}>
@@ -124,6 +143,9 @@ function Portfolio({ isLoaded }) {
                         </div>
                     </div>
                     <div className="watchlists-list">
+                        {  watchlists?.length === 0 && (
+                            <div className="empty-investments">Create some watchlists...</div>
+                        )}
                         {
                             watchlists?.map((watchlist, i) => (
                                 <div className="watchlist-item" key={watchlist.id} onClick={() => handleClickWatchlist(i)}>

@@ -2,19 +2,22 @@ import "./StockDetailChart.css";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { LineChart, Line, Tooltip, ResponsiveContainer, XAxis, YAxis } from 'recharts';
-import { getStockHistoryData, getStockHistoryData7, thunkGetStockInterval } from "../../store/stock";
+import { getStockDetailData, getStockHistoryData, getStockHistoryData7, thunkGetStockInterval } from "../../store/stock";
+import { useParams } from "react-router-dom";
 
 
-function StockDetailChart({ stocksymbol, name }) {
+function StockDetailChart() {
+    const { stocksymbol } = useParams();
     const data1 = useSelector(getStockHistoryData);
     const data7 = useSelector(getStockHistoryData7);
-    const [data, setData] = useState(data1);
+    const stockDetail = useSelector(getStockDetailData);
+    const [data, setData] = useState(data7);
     const [value, setValue] = useState(data ? data[data.length - 1]?.close : 100);
-    const [days, setDays] = useState(1);
+    const [days, setDays] = useState(7);
     const dispatch = useDispatch();
     const text = { 1: "Today", 7: "Past week", 30: "Past month", 90: "Past 3 months", 365: "Past year" };
     const chooseData = { 1: data1, 7: data7 };
-    const timeInterval = { 1: "5min" };
+    const timeInterval = { 1: "5min", 7: "5min" };
 
     const CustomTooltip = ({ active, payload, label }) => {
         useEffect(() => {
@@ -42,26 +45,25 @@ function StockDetailChart({ stocksymbol, name }) {
 
     useEffect(() => {
         dispatch(thunkGetStockInterval(timeInterval[days], stocksymbol))
-            .then(setData(data1))
+            .then(setData(data7))
             .then(setValue(data[data.length - 1]?.close));
     }, [dispatch]);
 
     useEffect(() => {
         setData(chooseData[days]);
-        setValue(data[data.length - 1]?.close);
-    }, [days, data1]);
-
-    if (!data && !data1) {
-        return null;
-    }
+        setValue(chooseData[days][data.length - 1]?.close);
+    }, [days, data1, data7]);
 
     return (
         <>
             <div className="total-assets-wrapper">
-                <div className="company-name">{name}</div>
-                <div className="total-assets">$ {value}</div>
+                <div className="company-name">{stockDetail?.companyName}</div>
+                <div className="total-assets">$ {stockDetail?.price}</div>
                 <div>
-                    <span className={value - data[0]?.close < 0 ? "different-red" : "different-green"}>${Number(value - data[0]?.close)?.toFixed(2)}({Number((value - data[0]?.close) * 100 / data[0]?.close)?.toFixed(2)}%)</span>
+                    <span className={value - data[0]?.close < 0 ? "different-red" : "different-green"}>
+                        ${Number(value - data[0]?.close)?.toFixed(2)}
+                        ({Number((value - data[0]?.close) * 100 / data[0]?.close)?.toFixed(2)}%)
+                    </span>
                     <span>{text[days]}</span>
                 </div>
             </div>

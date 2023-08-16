@@ -4,9 +4,11 @@ import { useModal } from "../../context/Modal";
 import * as sessionActions from "../../store/session";
 import signupimg from "../../assets/images/signup.png";
 import "./SignupForm.css";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 function SignupFormModal() {
     const dispatch = useDispatch();
+    const history = useHistory();
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [firstName, setFirstName] = useState("");
@@ -15,13 +17,12 @@ function SignupFormModal() {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [errors, setErrors] = useState({});
     const [disable, setDisable] = useState(true);
-    const { closeModal } = useModal();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (password === confirmPassword) {
             setErrors({});
-            return dispatch(
+            return await dispatch(
                 sessionActions.signup({
                     email,
                     username,
@@ -30,8 +31,12 @@ function SignupFormModal() {
                     password,
                 })
             )
-                .then(closeModal)
-                .catch(async (res) => {
+            .then(async (res) => {
+                if (res.ok) {
+                    history.push('/portfolio');
+                }
+            })
+            .catch(async (res) => {
                     const data = await res.json();
                     if (data && data.errors) {
                         setErrors(data.errors);

@@ -7,6 +7,7 @@ import Portfolio from "./components/Portfolio";
 import StockDetail from "./components/StockDetail";
 import LoginPage from "./components/LoginPage";
 import SignupFormModal from "./components/SignupFormModal";
+import Search from "./components/Search";
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         
         <Route exact path="/"  render={() => <LandingPage isLoaded={isLoaded} />} />
         <Route exact path="/login"  render={() => <LoginPage />} />
+        <Route exact path="/search" render={() => <Search isLoaded={isLoaded}/>} />
         <Route exact path="/signup"  render={() => <SignupFormModal />} />
         <Route exact path="/portfolio" render={() => <Portfolio isLoaded={isLoaded} />} />
         <Route exact path="/stock/:stocksymbol" render={() => <StockDetail isLoaded={isLoaded} />} />

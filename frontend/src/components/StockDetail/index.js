@@ -89,7 +89,7 @@ function StockDetail({ isLoaded }) {
             </div>
             <div className="stock-detail">
                 <div className="stock-detail-main">
-                    <StockDetailChart stocksymbol={stocksymbol} name={stockDetail.companyName} />
+                    <StockDetailChart name={stockDetail.companyName} />
                     <div className="stock-about-wrapper">
                         <h1>About</h1>
                         <p>{stockDetail.description}</p>
