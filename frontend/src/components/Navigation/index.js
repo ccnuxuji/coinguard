@@ -40,7 +40,7 @@ function Navigation({ isLoaded }) {
             {sessionUser && (
                 <div className='search-bar'>
                     <form onSubmit={handleStockSearch}>
-                        <input type="text" id="search" name="search" placeholder="Coming soon..."
+                        <input type="text" id="search" name="search" placeholder="Search stock..."
                             value={keyword}
                             onChange={(e) => setKeyword(e.target.value)}
                         />
