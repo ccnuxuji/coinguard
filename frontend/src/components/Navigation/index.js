@@ -1,13 +1,16 @@
-import React, { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import logoImg from '../../assets/images/leaf.png';
 import './Navigation.css';
+import { thunkSearchStockByNameAndSymbol } from '../../store/stock';
 
 function Navigation({ isLoaded }) {
+    const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
     const history = useHistory();
+    const [keyword, setKeyword] = useState("");
 
     const onClickLogin = (e) => {
         e.preventDefault();
@@ -19,10 +22,16 @@ function Navigation({ isLoaded }) {
         history.push('/signup');
     }
 
+    const handleStockSearch = (e) => {
+        e.preventDefault();
+        dispatch(thunkSearchStockByNameAndSymbol(keyword))
+            .then(history.push('/search'));
+    }
+
     return (
         <div className='nav-bar-wrapper'>
             {/* logo */}
-            <NavLink className='nav-bar-logo' to="/portfolio">
+            <NavLink className='nav-bar-logo' to={window.location.pathname !== '/' ? "/portfolio" : "/"}>
                 <img className='logo-img' alt='logo' src={logoImg} />
                 <div className='logo-text'>CoinGuard</div>
             </NavLink>
@@ -30,8 +39,12 @@ function Navigation({ isLoaded }) {
             {/* search bar */}
             {sessionUser && (
                 <div className='search-bar'>
-                    <form>
-                        <input type="text" id="search" name="search" placeholder="Coming soon..." />
+                    <form onSubmit={handleStockSearch}>
+                        <input type="text" id="search" name="search" placeholder="Coming soon..."
+                            value={keyword}
+                            onChange={(e) => setKeyword(e.target.value)}
+                        />
+                        <button>Search</button>
                     </form>
                 </div>
             )}

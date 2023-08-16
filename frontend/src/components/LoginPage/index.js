@@ -18,14 +18,18 @@ function LoginPage() {
         e.preventDefault();
         setErrors({});
         await dispatch(sessionActions.login({ credential, password }))
-            .then(closeModal)
+            .then(async (res) => {
+                if (res.ok) {
+                    history.push(`/portfolio`);
+                }
+            })
             .catch(async (res) => {
                 const data = await res.json();
                 if (data && data.errors) {
                     setErrors(data.errors);
                 }
             });
-        history.push(`/portfolio`);
+
     };
 
     const loginDemoUser = async (e) => {

@@ -99,7 +99,8 @@ const watchlistReducer = (state = initialState, action) => {
     let newState;
     switch (action.type) {
         case SET_WATCHLISTS:
-            newState = Object.assign({}, state);
+            newState = {...state};
+            newState.watchlists = {};
             action.payload.forEach((watchlist) => {
                 newState.watchlists[watchlist.id] = watchlist;
             });

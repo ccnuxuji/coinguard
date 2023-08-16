@@ -2,7 +2,7 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 
 const { setTokenCookie } = require('../../utils/auth');
-const { User } = require('../../db/models');
+const { User, Portfolio } = require('../../db/models');
 const { validateSignup } = require('../../utils/validation');
 
 const router = express.Router();
@@ -15,6 +15,7 @@ router.post(
     const { email, password, username, firstName, lastName } = req.body;
     const hashedPassword = bcrypt.hashSync(password);
     const user = await User.create({ email, username, hashedPassword, firstName, lastName });
+    const portfolio = await Portfolio.create({userId:user.id, cashValue: 0});
 
     const safeUser = {
       id: user.id,

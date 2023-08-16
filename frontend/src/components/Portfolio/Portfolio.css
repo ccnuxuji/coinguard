@@ -231,3 +231,30 @@
     align-items: center;
 }
 
+.stock-recomendation-wrapper {
+    margin-top: 50px;
+    
+}
+
+.stock-recomendation-list{
+    display: flex;
+    justify-content: space-around;
+}
+
+.stock-recomendation-list div{
+    padding: 1.5% 2% 1.5%;
+    /* background-color: #42494B; */
+    background-color: #1E2021;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.stock-recomendation-list div:hover{
+    background-color: #42494B;
+}
+
+.empty-investments {
+    height: 80px;
+    color: #333;
+}
+
