@@ -61,7 +61,10 @@ function Navigation({ isLoaded }) {
             {/* profile button */}
 
             {sessionUser && (
-                <ProfileButton user={sessionUser} />
+                <div className='portfolio-profileButton-wrapper'>
+                    <NavLink className="nav-to-portfolio" to="/portfolio">Portfolio</NavLink>
+                    <ProfileButton user={sessionUser} />
+                </div>
             )}
         </div>
 

@@ -13,31 +13,6 @@
     margin-bottom: 10px;
 }
 
-.login-signup-buttons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.login-signup-buttons button {
-    cursor: pointer;
-    height: 50px;
-    width: 100px;
-    border-radius: 20px;
-    margin-right: 20px;
-    border: 1px solid rgb(255, 199, 87);
-}
-
-.home-login-button {
-    background-color: black;
-    color: rgb(255, 199, 87);
-}
-
-.home-signup-button {
-    background-color: rgb(255, 199, 87);
-    color: black;
-}
-
 .logo-img {
     height: 40px;
     display: inline-block;
@@ -113,9 +88,52 @@
     align-items: center;
 }
 
+.login-signup-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-signup-buttons button {
+    cursor: pointer;
+    height: 50px;
+    width: 100px;
+    border-radius: 20px;
+    margin-right: 20px;
+    border: 1px solid rgb(255, 199, 87);
+}
+
+.home-login-button {
+    background-color: black;
+    color: rgb(255, 199, 87);
+}
+
+.home-signup-button {
+    background-color: rgb(255, 199, 87);
+    color: black;
+}
+
 .search-bar input {
     color: white;
     width: 400px;
     height: 35px;
     background-color: black;
 }
+
+.portfolio-profileButton-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.portfolio-profileButton-wrapper .nav-to-portfolio{
+    padding-right: 10px;
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+}
+
+.portfolio-profileButton-wrapper .nav-to-portfolio:hover{
+    color: gold;
+}
+

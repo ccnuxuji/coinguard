@@ -20,8 +20,7 @@ function App() {
 
   return (
     <>
-      <Switch>
-        
+      <Switch>  
         <Route exact path="/"  render={() => <LandingPage isLoaded={isLoaded} />} />
         <Route exact path="/login"  render={() => <LoginPage />} />
         <Route exact path="/search" render={() => <Search isLoaded={isLoaded}/>} />
