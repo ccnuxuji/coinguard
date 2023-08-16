@@ -32,7 +32,6 @@ router.get(
             ]
         });
 
-        portfolio = portfolio.toJSON();
         portfolio.dataToday = [];
         const tmp = new Date();
         tmp.setHours(-7);
@@ -71,7 +70,7 @@ router.put(
                 userId
             }
         });
-        portfolio.set({ cashValue:  Number(portfolio.cashValue + amount)});
+        portfolio.set({ cashValue:  parseFloat(portfolio.cashValue) + amount});
         await portfolio.save();
 
         const transaction_tobe_added = {
