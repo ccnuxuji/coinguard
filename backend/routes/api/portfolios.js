@@ -32,6 +32,7 @@ router.get(
             ]
         });
 
+        portfolio = portfolio.toJSON();
         portfolio.dataToday = [];
         const tmp = new Date();
         tmp.setHours(-7);
@@ -52,7 +53,7 @@ router.get(
             tmp.setMinutes(tmp.getMinutes() + 5)
         }
         portfolio.numPoints = portfolio.dataToday.length;
-        portfolio.cashValue = parseFloat(portfolio.cashValue);
+        // portfolio.cashValue = parseFloat(portfolio.cashValue);
         res.json(portfolio);
     }
 );
@@ -97,7 +98,7 @@ router.put(
                 userId
             }
         });
-        portfolio.set({ cashValue:  portfolio.cashValue - amount});
+        portfolio.set({ cashValue:  parseFloat(portfolio.cashValue) - amount});
         await portfolio.save();
 
         const transaction_tobe_added = {
