@@ -63,7 +63,8 @@ router.put(
     async (req, res, next) => {
         const userId = req.user.id;
         let { symbol, shares, sellingPrice } = req.body;
-        shares = Number(shares);
+        shares = parseFloat(shares);
+        sellingPrice = parseFloat(shares);
         const portfolio = await Portfolio.findOne({ where: { userId } });
         let stock = await Stock.findOne({ where: { symbol } });
         let investment = await Investment.findOne({ where: { stockId: stock.id } });
@@ -78,7 +79,7 @@ router.put(
         }
 
         // not enough stocks to sell
-        if (shares > investment.numShares) {
+        if (shares > parseFloat(investment.numShares)) {
             const err = new Error('not enough shares to sell');
             err.status = 401;
             err.title = 'not enough stocks';
@@ -87,16 +88,16 @@ router.put(
         }
 
         // update the portfolio
-        portfolio.set({cashValue: Number(portfolio.cashValue) + Number(shares * sellingPrice)});
+        portfolio.set({cashValue: parseFloat(portfolio.cashValue) + parseFloat(shares * sellingPrice)});
         await portfolio.save();
 
         // update the investment
-        if (shares < investment.numShares) {
-            investment.set({ numShares: investment.numShares - shares });
+        if (shares < parseFloat(investment.numShares)) {
+            investment.set({ numShares: parseFloat(investment.numShares) - shares });
             await investment.save();
         }
         // delete the investment
-        else if (shares === investment.numShares) {
+        else if (shares === parseFloat(investment.numShares)) {
             await investment.destroy();
             investment = await Investment.findOne({ where: { stockId: stock.id } });
         }
