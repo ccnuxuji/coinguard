@@ -12,7 +12,8 @@ router.post(
     async (req, res, next) => {
         const userId = req.user.id;
         let { symbol, shares, buyingPrice } = req.body;
-        shares = Number(shares);
+        shares = parseFloat(shares);
+        buyingPrice = parseFloat(buyingPrice); 
 
         const portfolio = await Portfolio.findOne({ where: { userId } });
         // check if the stock exist, if not, save it
@@ -30,7 +31,7 @@ router.post(
         }
 
         // not enough balance to buy
-        if (portfolio.cashValue < shares * buyingPrice) {
+        if (parseFloat(portfolio.cashValue) < parseFloat(shares) * parseFloat(buyingPrice)) {
             const err = new Error('not enough balance to buy');
             err.status = 401;
             err.title = 'not enough balance';
@@ -39,12 +40,12 @@ router.post(
         }
 
         // update the portfolio
-        portfolio.set({cashValue: portfolio.cashValue - shares * buyingPrice});
+        portfolio.set({cashValue: parseFloat(portfolio.cashValue) - parseFloat(shares) * parseFloat(buyingPrice)});
         await portfolio.save();
 
         // update the investment
-        const averageBuyingPrice = (shares * buyingPrice + investment.numShares * investment.averageBuyingPrice) / (shares + investment.numShares);
-        investment.set({ numShares: shares + investment.numShares, averageBuyingPrice });
+        const averageBuyingPrice = (parseFloat(shares) * parseFloat(buyingPrice) + parseFloat(investment.numShares) * parseFloat(investment.averageBuyingPrice)) / (parseFloat(shares) + parseFloat(investment.numShares));
+        investment.set({ numShares: parseFloat(shares) + parseFloat(investment.numShares), averageBuyingPrice });
         await investment.save();
 
         // creat a new order
