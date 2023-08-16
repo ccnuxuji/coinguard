@@ -65,7 +65,7 @@ function WithdrawModal() {
                         <p>{errors.amount}</p>
                     )}
                     <div className="deposit-submit-button-div">
-                        <div className="daily-transfer-limit">Avaliable balance is ${portfolio?.cashValue.toFixed(2)}</div>
+                        <div className="daily-transfer-limit">Avaliable balance is ${Number(portfolio?.cashValue).toFixed(2)}</div>
                         <button
                             className={(amount < 1 || amount > portfolio?.cashValue) ? "disabled" : ""}
                             type="submit"
