@@ -64,7 +64,7 @@ router.put(
         const userId = req.user.id;
         let { symbol, shares, sellingPrice } = req.body;
         shares = parseFloat(shares);
-        sellingPrice = parseFloat(shares);
+        sellingPrice = parseFloat(sellingPrice);
         const portfolio = await Portfolio.findOne({ where: { userId } });
         let stock = await Stock.findOne({ where: { symbol } });
         let investment = await Investment.findOne({ where: { stockId: stock.id } });
@@ -88,7 +88,7 @@ router.put(
         }
 
         // update the portfolio
-        portfolio.set({cashValue: parseFloat(portfolio.cashValue) + parseFloat(shares * sellingPrice)});
+        portfolio.set({cashValue: parseFloat(portfolio.cashValue) + parseFloat(shares) * parseFloat(sellingPrice)});
         await portfolio.save();
 
         // update the investment
