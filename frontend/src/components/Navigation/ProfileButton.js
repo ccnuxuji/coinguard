@@ -30,10 +30,15 @@ function ProfileButton({ user }) {
 
   const closeMenu = () => setShowMenu(false);
 
-  const logout = (e) => {
+  const logout = async (e) => {
     e.preventDefault();
-    dispatch(sessionActions.logout());
-    history.push('/');
+    await dispatch(sessionActions.logout())
+      .then((res) => {
+        if (res.ok) {
+          history.push('/');
+        }
+      });
+
   };
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
@@ -44,7 +49,7 @@ function ProfileButton({ user }) {
         {/* {user &&
           <Link to='/spots/new' className="create-spot-text">Create a New Spot</Link>
         } */}
-        <button 
+        <button
           onClick={openMenu}
           className="navigtion-button-wrapper">
           <i className="fa-solid fa-bars"></i>

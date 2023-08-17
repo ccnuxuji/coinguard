@@ -2,8 +2,10 @@ const SET_STOCK = "stock/setSTOCK";
 const SET_STOCK7 = "stock/setSTOCK7";
 const SET_STOCK_DETAIL = "stock/setSTOCKDETAIL";
 const SET_SEARCH_DATA = "stock/setSEARCHDATA";
+const SET_GENERAL_NEWS = "stock/setGENERALNEWS";
 const apiKey = process.env.REACT_APP_FMP_API_KEY;
 const searchAPIkey = process.env.REACT_APP_FMP_SEARCH_API_KEY;
+const finnhubKey = process.env.REACT_APP_FINNHUB_API_KEY;
 
 
 /***********************actions************************************** */
@@ -34,6 +36,13 @@ const setSearchData = (searchData) => {
         payload: searchData,
     };
 };
+
+const setGeneralNews = (generalnews) => {
+    return {
+        type: SET_GENERAL_NEWS,
+        payload: generalnews,
+    };
+}
 
 /*******************************thunks***************************** */
 export const thunkGetStockInterval = (timeInterval, stockSymbol) => async (dispatch) => {
@@ -89,14 +98,29 @@ export const thunkSearchStockByNameAndSymbol = (keyword) => async (dispatch) => 
     return response;
 };
 
+export const thunkGetGeneralNews = (keyword) => async (dispatch) => {
+    const response = await fetch(
+        `https://finnhub.io/api/v1/news?category=general&token=${finnhubKey}`,
+        {
+            method: "GET"
+        }
+    );
+    const data = await response.json();
+    if (response.ok) {
+        dispatch(setGeneralNews(data.slice(0, 10)));
+    }
+    return response;
+};
+
 /*******************************selectors**************************** */
 export const getStockHistoryData = (state) => state.stock.historydata;
 export const getStockHistoryData7 = (state) => state.stock.historydata7;
 export const getStockDetailData = (state) => state.stock.stockdetail;
 export const getStockSearchData = (state) => state.stock.searchdata;
+export const getGeneralNews = (state) => state.stock.generalnews;
 
 /******************************reducers***************************** */
-const initialState = { historydata: [], stockdetail: {}, historydata7: [], searchdata: [] };
+const initialState = { historydata: [], stockdetail: {}, historydata7: [], searchdata: [], generalnews: [], stocknews: [] };
 
 const stockReducer = (state = initialState, action) => {
     let newState;
@@ -116,6 +140,10 @@ const stockReducer = (state = initialState, action) => {
         case SET_SEARCH_DATA:
             newState = { ...state };
             newState.searchdata = action.payload
+            return newState;
+        case SET_GENERAL_NEWS:
+            newState = { ...state };
+            newState.generalnews = action.payload
             return newState;
         default:
             return state;

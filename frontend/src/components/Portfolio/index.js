@@ -13,11 +13,13 @@ import WatchlistFormModal from "../WatchlistFormModal";
 import WatchlistEditModal from "../WatchlistFormModal/WatchlistEditModal";
 import WatchlistDeleteModal from "../WatchlistFormModal/WatchlistDeleteModal";
 import { useHistory } from "react-router-dom";
+import { getGeneralNews, thunkGetGeneralNews } from "../../store/stock";
 
 function Portfolio({ isLoaded }) {
     const history = useHistory();
     const dispatch = useDispatch();
     const portfolio = useSelector(getportfolio);
+    const generalNews = useSelector(getGeneralNews);
     const watchlists = useSelector(getWatchlists);
     const [showBuyingPower, setShowBuyingPower] = useState(false);
     const [showWatchList, setShowWatchList] = useState(Array(watchlists.length).fill(false));
@@ -35,6 +37,7 @@ function Portfolio({ isLoaded }) {
     useEffect(() => {
         dispatch(thunkGetPortfolio());
         dispatch(thunkGetWatchlists());
+        dispatch(thunkGetGeneralNews());
     }, [dispatch]);
 
     return (
@@ -46,7 +49,7 @@ function Portfolio({ isLoaded }) {
             <div className="portfolio-detail">
                 <div className="portfolio-main">
                     <div className="portfolio-line-chart">
-                        <StockLineChart data={portfolio?.dataToday} />
+                        <StockLineChart data={portfolio?.dataOneyear} />
                         {/* <TimeLine /> */}
                     </div>
                     <div className="portfolio-buyingpower-wrapper" onClick={clickBuyingPower}>
@@ -102,32 +105,65 @@ function Portfolio({ isLoaded }) {
                         </div>
                     </div>
 
+                    <div className="general-news-wrapper">
+                        <div className="general-news-title">
+                            <h3>Top news</h3>
+                        </div>
+                        <div className="stock-news-list">
+                            {
+                                generalNews?.map(newsItem => {
+                                    const tmp = new Date(newsItem.datetime);
+                                    console.log(tmp)
+                                    return (
+                                        <div className="newsItem-wrapper" key={newsItem.id} onClick={() => window.location.href = newsItem.url}>
+                                            <div className="newsItem-main">
+                                                <div>From {newsItem.source}</div>
+                                                <div>{newsItem.headline}</div>
+                                            </div>
+                                            <div className="newsItem-img-wrapper">
+                                                <img alt="" src={newsItem.image} />
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+                    </div>
+
+
+
                 </div>
                 <div className="portfolio-sidebar">
                     <div className="investments-header-wrapper">
                         <div className="investments-header">
-                            Investments
+                            Investments:
+                        </div>
+                        <div>
+                            $ {portfolio?.totalAssets}
                         </div>
                     </div>
                     <div className="investments-list">
-                        { portfolio?.Investments.length === 0 && (
+                        {portfolio?.Investments.length === 0 && (
                             <div className="empty-investments">Find some stocks to buy...</div>
                         )}
                         {
-                            portfolio?.Investments.map(investment => (
-                                <Link className="stock-list-item" key={investment.id} to={`/stock/${investment.Stock.symbol}`}>
-                                    <div className="stocklist-item-symbol">
-                                        {investment.Stock.symbol}
-                                    </div>
-                                    <div className="stocklist-item-minichart">
-                                        mini chart
-                                    </div>
-                                    <div className="stocklist-item-priceDetail">
-                                        <div className="stocklist-item-price">$1276.55</div>
-                                        <div className="stocklist-item-difference"><span>+0.11%</span></div>
-                                    </div>
-                                </Link>
-                            ))
+                            portfolio?.Investments.map(investment => {
+                                const p = Math.random() - 0.5;
+                                return (
+                                    <Link className="stock-list-item" key={investment.id} to={`/stock/${investment.Stock.symbol}`}>
+                                        <div className="stocklist-item-symbol">
+                                            {investment.Stock.symbol}
+                                        </div>
+                                        <div className="stocklist-item-minichart">
+                                            mini chart
+                                        </div>
+                                        <div className="stocklist-item-priceDetail">
+                                            <div className={p > 0 ? "stocklist-item-price" : "stocklist-item-price-red"}>${(200 * (1 + p)).toFixed(2)}</div>
+                                            <div className={p > 0 ? "stocklist-item-difference" : "stocklist-item-difference-red"}><span>{p.toFixed(2)}%</span></div>
+                                        </div>
+                                    </Link>
+                                )
+                            })
                         }
                     </div>
                     <div className="watchlists-header-wrapper">
@@ -143,7 +179,7 @@ function Portfolio({ isLoaded }) {
                         </div>
                     </div>
                     <div className="watchlists-list">
-                        {  watchlists?.length === 0 && (
+                        {watchlists?.length === 0 && (
                             <div className="empty-investments">Create some watchlists...</div>
                         )}
                         {
