@@ -8,14 +8,12 @@ import { useSelector } from 'react-redux';
 function LandingPage({ isLoaded }) {
     const history = useHistory();
     const sessionUser = useSelector(state => state.session.user);
-    const [redirect, setRedirect] = useState(false);
-
 
     useEffect(() => {
-        if (redirect) {
+        if (isLoaded && sessionUser) {
             history.push('/portfolio');
         }
-    }, [redirect]);
+    }, [isLoaded]);
 
     return (
         <div>

@@ -16,7 +16,7 @@ function StockDetailChart() {
     const [days, setDays] = useState(7);
     const dispatch = useDispatch();
     const text = { 1: "Today", 7: "Past week", 30: "Past month", 90: "Past 3 months", 365: "Past year" };
-    const chooseData = { 1: data1, 7: data7 };
+    const chooseData = { 1: data1, 7: data7, 30: data1, 90: data7, 365: data1 };
     const timeInterval = { 1: "5min", 7: "5min" };
 
     const CustomTooltip = ({ active, payload, label }) => {
@@ -28,7 +28,7 @@ function StockDetailChart() {
         if (active && payload && payload.length) {
             return (
                 <div className="custom-tooltip">
-                    <p className="label">{`Time: ${label}`}</p>
+                    <p className="label">{`${label}`}</p>
                     <p className="label">{`Value: ${payload[0].value}`}</p>
                     {/* <p className="desc">Anything you want can be displayed here.</p> */}
                 </div>
