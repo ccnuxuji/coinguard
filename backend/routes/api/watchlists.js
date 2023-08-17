@@ -127,7 +127,6 @@ router.put(
     async (req, res, next) => {
         const symbol = req.params.symbol;
         const {watchlistIds} = req.body;
-        console.log(req.body)
         let stock = await Stock.findOne({
             where: {symbol}
         });

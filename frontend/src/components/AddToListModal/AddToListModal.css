@@ -42,6 +42,7 @@
     height: 45px;
     width: 200px;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .stock-watchlist-item {

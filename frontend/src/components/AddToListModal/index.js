@@ -22,7 +22,6 @@ function AddToListModal({ symbol }) {
         if (newSet.has(wl.id)) {
             newSet.delete(wl.id);
         } else {
-            console.log(wl.id)
             newSet.add(wl.id);
         }
         setWatchlistIdSet(newSet);

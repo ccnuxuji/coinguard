@@ -113,7 +113,6 @@ function Portfolio({ isLoaded }) {
                             {
                                 generalNews?.map(newsItem => {
                                     const tmp = new Date(newsItem.datetime);
-                                    console.log(tmp)
                                     return (
                                         <div className="newsItem-wrapper" key={newsItem.id} onClick={() => window.location.href = newsItem.url}>
                                             <div className="newsItem-main">
@@ -139,7 +138,7 @@ function Portfolio({ isLoaded }) {
                             Investments:
                         </div>
                         <div>
-                            $ {portfolio?.totalAssets}
+                            $ {Number(portfolio?.totalAssets)?.toFixed(2)}
                         </div>
                     </div>
                     <div className="investments-list">
