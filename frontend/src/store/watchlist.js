@@ -40,7 +40,7 @@ export const thunkCreateWatchlists = (watchlist) => async (dispatch) => {
     });
     const data = await response.json();
     if (response.ok) {
-        return data;
+        await dispatch(thunkGetWatchlists());
     }
     return response;
 };
