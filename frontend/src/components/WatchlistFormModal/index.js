@@ -14,9 +14,9 @@ function WatchlistFormModal() {
         closeModal();
     }
 
-    const handleCreateList = (e) => {
+    const handleCreateList = async (e) => {
         e.preventDefault();
-        dispatch(thunkCreateWatchlists({ name }))
+        await dispatch(thunkCreateWatchlists({ name }))
             .then(dispatch(thunkGetWatchlists()))
             .then(closeModal());
     }
