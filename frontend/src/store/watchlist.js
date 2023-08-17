@@ -83,7 +83,7 @@ export const thunkAddStockToWatchlists = (symbol, watchlistIds) => async (dispat
     });
     const data = await response.json();
     if (response.ok) {
-        dispatch(thunkGetWatchlists());
+        await dispatch(thunkGetWatchlists());
         return data;
     }
     return response;
