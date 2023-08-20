@@ -60,7 +60,7 @@ router.get(
         let total = portfolio.Investments.reduce((acc, investment) => acc + investment.numShares * investment.averageBuyingPrice, 0);
         let currentValue = !total ? 2468.37 : total;
         let currentDate = new Date();
-        const volatility = 0.2;
+        const volatility = 0.1;
         for (let day = 1; day <= 365; day++) {
             if (day === 1) {
                 const newDate = new Date(currentDate);

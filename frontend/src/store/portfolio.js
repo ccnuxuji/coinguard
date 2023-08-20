@@ -17,7 +17,7 @@ export const thunkGetPortfolio = () => async (dispatch) => {
     });
     const data = await response.json();
     if (response.ok) {
-        dispatch(setPortfolio(data));
+        await dispatch(setPortfolio(data));
     }
     return response;
 };
@@ -32,7 +32,7 @@ export const thunkDepositMoney = (deposit) => async (dispatch) => {
     });
     const data = await response.json();
     if (response.ok) {
-        dispatch(thunkGetPortfolio());
+        await dispatch(thunkGetPortfolio());
     }
     return response;
 };
@@ -47,7 +47,7 @@ export const thunkWithdrawMoney = (withdraw) => async (dispatch) => {
     });
     const data = await response.json();
     if (response.ok) {
-        dispatch(thunkGetPortfolio());
+        await dispatch(thunkGetPortfolio());
     }
     return response;
 };

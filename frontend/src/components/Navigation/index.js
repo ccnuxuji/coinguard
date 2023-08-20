@@ -44,7 +44,7 @@ function Navigation({ isLoaded }) {
                             value={keyword}
                             onChange={(e) => setKeyword(e.target.value)}
                         />
-                        <button>Search</button>
+                        <button><i className="fas fa-search"></i></button>
                     </form>
                 </div>
             )}
@@ -55,6 +55,7 @@ function Navigation({ isLoaded }) {
                     <button className='home-login-button' onClick={onClickLogin}>Log in</button>
                     <button className='home-signup-button' onClick={onClickSignup}>Sign up</button>
                 </div>
+
             )}
 
 

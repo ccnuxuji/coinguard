@@ -19,9 +19,10 @@
 .search-result-item {
     width: 80%;
     margin-bottom: 20px;
+    border-radius: 5px;
     height: 50px;
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     align-items: center;
     background-color: #42494B;
     border: #42494B 1px solid;
@@ -32,4 +33,14 @@
 
 .search-result-item:hover {
     background-color: #31363A;
+}
+
+.search-company-name {
+    padding-left: 5%;
+    width: 60%;
+}
+
+.search-stock-symbol{
+    padding-left: 15%;
+    width: 40%;
 }

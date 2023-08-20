@@ -15,7 +15,7 @@ export const thunkBuyStock = (buyorder) => async (dispatch) => {
     });
     const data = await response.json();
     if (response.ok) {
-        dispatch(thunkGetPortfolio());
+        await dispatch(thunkGetPortfolio());
     }
     return data;
 };
@@ -30,7 +30,7 @@ export const thunkSellStock = (sellorder) => async (dispatch) => {
     });
     const data = await response.json();
     if (response.ok) {
-        dispatch(thunkGetPortfolio());
+        await dispatch(thunkGetPortfolio());
     }
     return data;
 };

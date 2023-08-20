@@ -19,8 +19,8 @@ function Search({ isLoaded }) {
                     {
                         searchdata?.map(stock => (
                             <NavLink className="search-result-item" to={`/stock/${stock.symbol}`}>
-                                <div>stock name : {stock.name} </div>
-                                <div>stock symbol : {stock.symbol} </div>
+                                <div className="search-company-name">Company name : {stock.name} </div>
+                                <div className="search-stock-symbol">Stock symbol : {stock.symbol} </div>
                             </NavLink>
                         ))
                     }

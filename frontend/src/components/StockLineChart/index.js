@@ -45,7 +45,7 @@ function StockLineChart({ data }) {
         <div className={`total-assets`}>$ {value?.toFixed(2)}</div>
         <div ><span className={`${(value - data[0]?.totalAssets) < 0 ? "difference-red" : "difference-green"}`}>
           ${(value - data[0]?.totalAssets).toFixed(2)}
-          ({((value - data[0]?.totalAssets) / data[0]?.totalAssets).toFixed(2)}%)</span>Past year(sample data)</div>
+          ({((value - data[0]?.totalAssets) * 100 / data[0]?.totalAssets).toFixed(2)}%)</span>Past year(sample data)</div>
       </div>
 
       <LineChart data={data} width={880} height={500} onMouseLeave={onMouseLeaveHandler}>
