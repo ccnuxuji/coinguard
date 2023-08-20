@@ -1,4 +1,4 @@
-import { thunkGetStockInterval } from "../../store/stock";
+import { getCompanyNews, thunkGetCompanyNews, thunkGetStockInterval } from "../../store/stock";
 import Navigation from "../Navigation";
 import StockDetailChart from "./StockDetailChart";
 import { useParams, useHistory } from 'react-router-dom';
@@ -16,6 +16,7 @@ function StockDetail({ isLoaded }) {
     const dispatch = useDispatch();
     const history = useHistory();
     const stockDetail = useSelector(getStockDetailData);
+    const companynews = useSelector(getCompanyNews);
     const portfolio = useSelector(getportfolio);
     const investments = portfolio?.Investments;
     const investment = investments?.filter(invest => invest.Stock.symbol === stocksymbol)[0];
@@ -58,10 +59,6 @@ function StockDetail({ isLoaded }) {
         setSidebar("before-order")
     };
 
-    const handleAddtolistsClick = (e) => {
-        e.preventDefault();
-    };
-
     const handleClickBuyTitle = (e) => {
         setOrderType("buy");
         setSellTitleClass("buy");
@@ -73,6 +70,7 @@ function StockDetail({ isLoaded }) {
     }
 
     useEffect(() => {
+        dispatch(thunkGetCompanyNews(stocksymbol));
         dispatch(thunkGetCompanyInformation(stocksymbol))
             .then(setCurrentPrice(Object.keys(stockDetail).length !== 0 ? stockDetail.price : 100));
         dispatch(thunkGetPortfolio());
@@ -93,6 +91,31 @@ function StockDetail({ isLoaded }) {
                     <div className="stock-about-wrapper">
                         <h1>About</h1>
                         <p>{stockDetail.description}</p>
+                    </div>
+
+                    <div className="general-news-wrapper">
+                        <div className="general-news-title">
+                            <h3>Top news</h3>
+                        </div>
+                        <div className="stock-news-list">
+                            {
+                                companynews?.map(newsItem => {
+                                    const tmp = new Date(newsItem.datetime);
+                                    return (
+                                        <div className="newsItem-wrapper" key={newsItem.id} onClick={() => window.location.href = newsItem.url}>
+                                            <div className="newsItem-main">
+                                                <div className="news-source">{newsItem.source}</div>
+                                                <div className="news-headline">{newsItem.headline}</div>
+                                                <div className="news-summary">{newsItem.summary}</div>
+                                            </div>
+                                            <div className="newsItem-img-wrapper">
+                                                <img alt="" src={newsItem.image} />
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
                     </div>
                 </div>
 
