@@ -16,11 +16,19 @@ module.exports = {
       },
       stockId: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Stocks',
+          key: 'id'
+        }
       },
       portfolioId: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: {
+          model: 'Portfolios',
+          key: 'id'
+        }
       },
       numShares: {
         allowNull: false,

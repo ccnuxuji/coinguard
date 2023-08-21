@@ -19,7 +19,7 @@ module.exports = {
         references: {
           model: 'Watchlists',
           key: 'id',
-        },
+        }
       },
       stockId: {
         type: Sequelize.INTEGER,
