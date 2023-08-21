@@ -24,7 +24,6 @@ function Portfolio({ isLoaded }) {
     const generalNews = useSelector(getGeneralNews);
     const watchlists = useSelector(getWatchlists);
     const minichartData = useSelector(getMiniChartData);
-    console.log(minichartData);
     
     const [showBuyingPower, setShowBuyingPower] = useState(false);
     const [showWatchList, setShowWatchList] = useState(Array(watchlists.length).fill(false));
