@@ -21,6 +21,10 @@
     background-color: white;
 }
 
+.login-form p {
+    color: red;
+}
+
 .login-modal {
     width: 568px;
     height: 568px;
@@ -62,6 +66,7 @@
 }
 
 .login-submit-button-div button {
+    cursor: pointer;
     width: 102%;
     height: 40px;
     border: 0;
@@ -130,6 +135,10 @@
     border-radius: 9px;
     color: black;
     background-color: white;
+}
+
+.demouser:hover {
+    background-color: green;
 }
 
 

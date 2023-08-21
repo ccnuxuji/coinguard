@@ -42,6 +42,10 @@
     align-items: center;
 }
 
+.signup-form p{
+    color: red;
+}
+
 .signup-form form {
     width: 100%;
     padding-left: 5%;
@@ -59,6 +63,7 @@
 }
 
 .signup-submit-button-div button {
+    cursor: pointer;
     width: 102%;
     height: 40px;
     border: 0;

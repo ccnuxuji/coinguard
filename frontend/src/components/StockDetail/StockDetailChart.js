@@ -58,7 +58,7 @@ function StockDetailChart() {
         <>
             <div className="total-assets-wrapper">
                 <div className="company-name">{stockDetail?.companyName}</div>
-                <div className="total-assets">$ {stockDetail?.price}</div>
+                <div className="total-assets">$ {value}</div>
                 <div>
                     <span className={value - data[0]?.close < 0 ? "different-red" : "different-green"}>
                         ${Number(value - data[0]?.close)?.toFixed(2)}
