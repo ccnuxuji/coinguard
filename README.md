@@ -13,17 +13,16 @@ CoinGuard is a web application inspired by the popular stock exchange website, R
 ## Feature Lists
 
 1. Sign up, log in, and demo user 
-![db-schema](./images/signup-login.gif)
+![signup-login](./images/signup-login.gif)
 
 2. View stock details, buy and sell stock
+![stock-buy-sell](./images/stock-buy-sell.gif)
 
 3. Create customized watchlist
+![add-to-watchlist](./images/add-to-watchlist.gif)
 
 4. Search stocks
-
-## Contact me
-
-Jimmy Xu, ccnuxuji@gmail.com, [Linkedin](https://www.linkedin.com/in/ccnuxuji/)
+![search-stock](./images/search-stock.gif)
 
 ## Getting started
 1. Clone this repository:
@@ -48,3 +47,10 @@ Jimmy Xu, ccnuxuji@gmail.com, [Linkedin](https://www.linkedin.com/in/ccnuxuji/)
    * `npm start`
 
 6. Now you can use the Demo User or Create an account
+
+## Schema
+![db-schema](./images/coinguard-schema.png)
+
+## Contact me
+
+Jimmy Xu, ccnuxuji@gmail.com, [Linkedin](https://www.linkedin.com/in/ccnuxuji/)
