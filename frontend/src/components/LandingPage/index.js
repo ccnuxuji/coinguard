@@ -1,9 +1,10 @@
 import Navigation from "../Navigation";
 import "./LandingPage.css";
-import { useParams, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import financial from "../../assets/images/finance.jpg";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSelector } from 'react-redux';
+import Footer from "../Footer";
 
 function LandingPage({ isLoaded }) {
     const history = useHistory();
@@ -23,6 +24,7 @@ function LandingPage({ isLoaded }) {
             <div className="landing-main">
                 <img alt="" src={financial}/>
             </div>
+            <Footer />
         </div>
     );
 }

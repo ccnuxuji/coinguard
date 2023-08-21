@@ -64,9 +64,16 @@ function Navigation({ isLoaded }) {
             {sessionUser && (
                 <div className='portfolio-profileButton-wrapper'>
                     <NavLink className="nav-to-portfolio" to="/portfolio">Portfolio</NavLink>
+                    <div onClick={() => window.location.href = "https://www.linkedin.com/in/ccnuxuji/"}
+                        className="nav-to-portfolio" >Linkedin</div>
+                    <div onClick={() => window.location.href = "https://github.com/ccnuxuji/coinguard"}
+                        className="nav-to-portfolio">Github</div>
                     <ProfileButton user={sessionUser} />
                 </div>
             )}
+
+
+
         </div>
 
     );

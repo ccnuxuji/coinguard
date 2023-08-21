@@ -55,8 +55,7 @@ export const thunkEditWatchlists = (watchlist) => async (dispatch) => {
     });
     const data = await response.json();
     if (response.ok) {
-        // dispatch(thunkGetWatchlists());
-        return data;
+        await dispatch(thunkGetWatchlists());
     }
     return response;
 };
