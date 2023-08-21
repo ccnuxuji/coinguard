@@ -121,10 +121,10 @@ function Portfolio({ isLoaded }) {
                         <div className="stock-recomendation-list">
                             <div onClick={() => history.push("/stock/AAPL")}>AAPL</div>
                             <div onClick={() => history.push("/stock/GOOGL")}>GOOGL</div>
-                            <div onClick={() => history.push("/stock/TGT")}>TGT</div>
-                            <div onClick={() => history.push("/stock/APP")}>APP</div>
-                            <div onClick={() => history.push("/stock/CATC")}>CATC</div>
-                            <div onClick={() => history.push("/stock/PEGY")}>PEGY</div>
+                            <div onClick={() => history.push("/stock/MSFT")}>MSFT</div>
+                            <div onClick={() => history.push("/stock/META")}>META</div>
+                            <div onClick={() => history.push("/stock/AMZN")}>AMZN</div>
+                            <div onClick={() => history.push("/stock/TSLA")}>TSLA</div>
                         </div>
                     </div>
 
