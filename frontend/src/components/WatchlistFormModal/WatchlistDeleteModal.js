@@ -2,9 +2,11 @@ import "./WatchlistDeleteModal.css";
 import { useModal } from "../../context/Modal";
 import { useDispatch } from "react-redux";
 import { thunkDeleteWatchlists, thunkGetWatchlists } from "../../store/watchlist";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 
 function WatchlistDeleteModal({ watchlist }) {
+    const history = useHistory();
     const { closeModal } = useModal();
     const dispatch = useDispatch();
 
@@ -17,7 +19,8 @@ function WatchlistDeleteModal({ watchlist }) {
         e.preventDefault();
         dispatch(thunkDeleteWatchlists(watchlist))
             .then(dispatch(thunkGetWatchlists()))
-            .then(closeModal());
+            .then(closeModal())
+            .then(history.push("/portfolio"));
     }
 
     return (

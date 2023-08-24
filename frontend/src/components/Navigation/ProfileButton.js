@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
 import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -62,8 +63,8 @@ function ProfileButton({ user }) {
           <>
             <li>Hello, {user.firstName}</li>
             <li>{user.email}</li>
-            {/* <li><Link to='/spots/current'>Manage Spot</Link></li>
-            <li><Link to='/reviews/current'>Manage Review</Link></li> */}
+            <li><Link to='/orders/current'>History</Link></li>
+            {/* <li><Link to='/reviews/current'>Manage Review</Link></li> */}
             <li>
               <button onClick={logout}>Log Out</button>
             </li>
