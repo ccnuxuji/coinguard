@@ -27,7 +27,11 @@ router.post('/googleauth', async function (req, res, next) {
     res.header("Access-Control-Allow-Origin", 'http://localhost:3000');
     res.header("Access-Control-Allow-Credentials", 'true');
     res.header("Referrer-Policy", "no-referrer-when-downgrade");
-    const redirectURL = 'http://localhost:8001/api/session/oauth';
+    let redirectURL = 'http://localhost:8001/api/session/oauth';
+    if (process.env.NODE_ENV === "production") {
+        redirectURL = "https://coinguard.onrender.com/api/session/oauth"
+    }
+
 
     const oAuth2Client = new OAuth2Client(
         process.env.GOOGLE_AUTH_CLIENT_ID,
@@ -83,7 +87,10 @@ router.get('/oauth', async function (req, res, next) {
 
     console.log(code);
     try {
-        const redirectURL = "http://localhost:8001/api/session/oauth"
+        let redirectURL = "http://localhost:8001/api/session/oauth"
+        if (process.env.NODE_ENV === "production") {
+            redirectURL = "https://coinguard.onrender.com/api/session/oauth"
+        }
         const oAuth2Client = new OAuth2Client(
             process.env.GOOGLE_AUTH_CLIENT_ID,
             process.env.GOOGLE_AUTH_CLIENT_SECRET,
@@ -102,7 +109,7 @@ router.get('/oauth', async function (req, res, next) {
     }
 
 
-    res.redirect(303, 'http://localhost:3000/portfolio');
+    res.redirect(303, process.env.NODE_ENV === "production" ? "https://coinguard.onrender.com/portfolio" : "http://localhost:3000/portfolio");
 
 });
 
