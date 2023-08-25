@@ -1,5 +1,5 @@
 const express = require('express');
-const { Portfolio, Investment, User, Transaction, Stock, Watchlist } = require('../../db/models');
+const { Portfolio, Investment, User, Transaction, Stock, Watchlist, WatchlistStock } = require('../../db/models');
 const { requireAuth, requireAuthorization } = require('../../utils/auth')
 const { checkResourceExist } = require('../../utils/errors')
 
@@ -144,6 +144,25 @@ router.put(
 
         await stock.setWatchlists(watchlists);
         res.json({"message": "Successfully add to lists"})
+    }
+
+);
+
+// delete one stock from a watchlist
+router.delete(
+    "/:watchlistId/delete/:stockId",
+    requireAuth,
+    async (req, res, next) => {
+        const watchlistId = req.params.watchlistId;
+        const stockId = req.params.stockId;
+        let stock = await WatchlistStock.destroy({
+            where: {
+                watchlistId,
+                stockId
+            }
+        });
+
+        res.json({"message": "Successfully delete from watchlist!"})
     }
 
 );

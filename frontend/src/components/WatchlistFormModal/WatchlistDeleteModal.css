@@ -4,6 +4,7 @@
 }
 
 .cancelDelete-button {
+    cursor: pointer;
     background-color: darkgray;
 }
 
@@ -26,6 +27,7 @@
 }
 
 .delete-modal-button-wrapper button {
+    cursor: pointer;
     width: 90%;
     height: 50px;
 }

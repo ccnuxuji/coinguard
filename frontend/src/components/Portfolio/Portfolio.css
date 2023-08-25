@@ -176,6 +176,7 @@
     align-items: center;
     justify-content: space-between;
     padding-right: 3%;
+    padding-left: 3%;
 }
 
 .watchlist-item {
@@ -185,13 +186,33 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    padding-bottom: 1%;
+    /* padding-bottom: 1%;
     padding-top: 1%;
     padding-left: 2%;
-    padding-right: 2%;
+    padding-right: 2%; */
 }
 
-.watchlist-name:hover {
+.portfolio-watchlist-name-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 50px;
+    text-decoration: none;
+    color: white;
+}
+
+.portfolio-watchlist-name-text a{
+    text-align: center;
+    text-decoration: none;
+    color: white;
+}
+
+.portfolio-watchlist-name-text:hover {
+    background-color: darkgrey;
+}
+
+.watchlist-item:hover {
     cursor: pointer;
     background-color: #42494B;
 }

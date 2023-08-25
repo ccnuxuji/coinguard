@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const { jwtConfig } = require('../config');
 const { User, Spot, Booking, Review, ReviewImage, SpotImage } = require('../db/models');
+const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
 const { secret, expiresIn } = jwtConfig;
 
@@ -38,6 +39,7 @@ const restoreUser = (req, res, next) => {
     req.user = null;
 
     return jwt.verify(token, secret, null, async (err, jwtPayload) => {
+
         if (err) {
             return next();
         }
@@ -49,6 +51,7 @@ const restoreUser = (req, res, next) => {
                     include: ['email', 'createdAt', 'updatedAt']
                 }
             });
+
         } catch (e) {
             res.clearCookie('token');
             return next();
@@ -58,6 +61,33 @@ const restoreUser = (req, res, next) => {
 
         return next();
     });
+};
+
+const restoreGoogleUser = async (req, _res, next) => {
+
+    // token parsed from cookies
+    if (!req.user) {
+        const { token } = req.cookies;
+        req.user = null;
+
+        try {
+            const response = await fetch(`https://www.googleapis.com/oauth2/v3/userinfo?access_token=${token}`);
+            const data = await response.json();
+            const username = data.sub;
+            req.user = await User.findOne({
+                where: {
+                    username
+                }
+            });
+        } catch(e) {
+            _res.clearCookie('token');
+            return next();
+        }
+
+        if (!req.user) _res.clearCookie('token');
+    }
+
+    return next();
 };
 
 // If there is no current user, return an error
@@ -133,4 +163,4 @@ const deteleBookingAuthorization = async function (req, _res, next) {
     return next(err);
 }
 
-module.exports = { setTokenCookie, restoreUser, requireAuth, requireAuthorization, deteleBookingAuthorization };
+module.exports = { setTokenCookie, restoreUser, restoreGoogleUser, requireAuth, requireAuthorization, deteleBookingAuthorization };

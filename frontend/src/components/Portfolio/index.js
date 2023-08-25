@@ -24,7 +24,7 @@ function Portfolio({ isLoaded }) {
     const generalNews = useSelector(getGeneralNews);
     const watchlists = useSelector(getWatchlists);
     const minichartData = useSelector(getMiniChartData);
-    
+
     const [showBuyingPower, setShowBuyingPower] = useState(false);
     const [showWatchList, setShowWatchList] = useState(Array(watchlists.length).fill(false));
     // const [miniChartData, setMiniChartData] = useState([]);
@@ -183,7 +183,7 @@ function Portfolio({ isLoaded }) {
                                                 width={80} height={35}
                                             >
                                                 <YAxis type="number" domain={['auto', 'auto']} tick={false} hide={true} />
-                                                <ReferenceLine y={data ? data[0]?.pv : ""}  stroke="#42494B" strokeDasharray="3 3" />
+                                                <ReferenceLine y={data ? data[0]?.pv : ""} stroke="#42494B" strokeDasharray="3 3" />
                                                 <Line type="monotone"
                                                     dataKey="pv"
                                                     stroke={data ? (data[data?.length - 1]?.pv < data[0]?.pv ? "rgb(255, 80, 0)" : "rgb(0, 200, 5)") : "rgb(0, 200, 5)"}
@@ -225,7 +225,9 @@ function Portfolio({ isLoaded }) {
                             watchlists?.map((watchlist, i) => (
                                 <div className="watchlist-item" key={watchlist.id} onClick={() => handleClickWatchlist(i)}>
                                     <div className="watchlist-name">
-                                        <div>{watchlist.name}</div>
+                                        <div className="portfolio-watchlist-name-text">
+                                            <Link  to={`/watchlist/${watchlist.id}`}>{watchlist.name}</Link>
+                                        </div>
                                         <div className="watchlist-edit">
                                             <OpenModalMenuItem
                                                 itemType="editicon"
@@ -254,7 +256,7 @@ function Portfolio({ isLoaded }) {
                                                             width={80} height={35}
                                                         >
                                                             <YAxis type="number" domain={['auto', 'auto']} tick={false} hide={true} />
-                                                            <ReferenceLine y={data ? data[0]?.pv : ""}  stroke="#42494B" strokeDasharray="3 3" />
+                                                            <ReferenceLine y={data ? data[0]?.pv : ""} stroke="#42494B" strokeDasharray="3 3" />
                                                             <Line type="monotone"
                                                                 dataKey="pv"
                                                                 stroke={data ? (data[data?.length - 1]?.pv < data[0]?.pv ? "rgb(255, 80, 0)" : "rgb(0, 200, 5)") : "rgb(0, 200, 5)"}

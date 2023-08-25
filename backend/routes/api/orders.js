@@ -5,6 +5,37 @@ const { checkResourceExist } = require('../../utils/errors')
 
 const router = express.Router();
 
+// get the current user's orders
+router.get(
+    '/current',
+    requireAuth,
+    async (req, res) => {
+        const userId = req.user.id;
+        let orders = await Order.findAll({
+            where: {
+                userId
+            },
+            include: [
+                {
+                    model: User,
+                    attributes: ['id', 'firstName', 'lastName']
+                },
+                {
+                    model: Stock
+                }
+            ]
+        });
+
+        let ordersArray = [];
+        orders.forEach(order => {
+            ordersArray.push(order.toJSON());
+        });
+        res.json({
+            orders: ordersArray
+        });
+    }
+);
+
 // buy stocks
 router.post(
     '',

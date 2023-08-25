@@ -70,6 +70,7 @@ function TransferFormModal() {
                         >Review transfer</button>
                     </div>
                 </form>
+
             </div>
 
         </div>

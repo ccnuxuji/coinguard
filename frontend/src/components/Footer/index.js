@@ -8,8 +8,8 @@ function Footer() {
             <p onClick={() => window.location.href = "https://www.linkedin.com/in/ccnuxuji/"}
                 className="nav-to-linkedin" ><i className="fa-brands fa-linkedin"></i>  Linkedin</p>
             <p onClick={() => window.location.href = "https://github.com/ccnuxuji/coinguard"}
-                className="nav-to-portfolio"><i class="fa-brands fa-github"></i>  Github</p>
-            <p><i class="fa-regular fa-envelope"></i>  ccnuxuji@gmail.com</p>
+                className="nav-to-portfolio"><i className="fa-brands fa-github"></i>  Github</p>
+            <p><i className="fa-regular fa-envelope"></i>  ccnuxuji@gmail.com</p>
         </footer>
     );
 }

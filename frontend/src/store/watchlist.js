@@ -72,13 +72,24 @@ export const thunkDeleteWatchlists = (watchlist) => async (dispatch) => {
     return response;
 };
 
+export const thunkDeleteStockFromWatchlist = (watchlistId, stockId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/watchlists/${watchlistId}/delete/${stockId}`, {
+        method: "DELETE"
+    });
+    const data = await response.json();
+    if (response.ok) {
+        await dispatch(thunkGetWatchlists());
+    }
+    return response;
+};
+
 export const thunkAddStockToWatchlists = (symbol, watchlistIds) => async (dispatch) => {
     const response = await csrfFetch(`/api/watchlists/stock/${symbol}`, {
         method: "PUT",
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({watchlistIds})
+        body: JSON.stringify({ watchlistIds })
     });
     const data = await response.json();
     if (response.ok) {
@@ -90,6 +101,7 @@ export const thunkAddStockToWatchlists = (symbol, watchlistIds) => async (dispat
 
 /*******************************selectors**************************** */
 export const getWatchlists = (state) => Object.values(state.watchlist.watchlists);
+export const getWatchlists2 = (state) => state.watchlist.watchlists;
 
 /******************************reducers***************************** */
 const initialState = { watchlists: {} };
@@ -98,14 +110,14 @@ const watchlistReducer = (state = initialState, action) => {
     let newState;
     switch (action.type) {
         case SET_WATCHLISTS:
-            newState = {...state};
+            newState = { ...state };
             newState.watchlists = {};
             action.payload.forEach((watchlist) => {
                 newState.watchlists[watchlist.id] = watchlist;
             });
             return newState;
         case REMOVE_WATCHLIST:
-            newState = {...state};
+            newState = { ...state };
             delete newState.watchlists[action.payload];
             return newState;
         default:
