@@ -5,6 +5,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import { useModal } from "../../context/Modal";
 import loginimg from "../../assets/images/login.png";
+import googleButton from '../../assets/images/btn_google_signin_dark_pressed_web.png';
+import { csrfFetch } from "../../store/csrf";
+
+
+function navigate(url) {
+    window.location.href = url;
+}
 
 function LoginPage() {
     const dispatch = useDispatch();
@@ -47,6 +54,15 @@ function LoginPage() {
             });
         history.push(`/portfolio`);
     };
+
+    const loginThroughGoogle = async () => {
+        const response = await csrfFetch('/api/session/googleauth', { method: 'post' });
+        const data = await response.json();
+        console.log(data);
+        navigate(data.url);
+    };
+
+
     return (
         <div className="login-page-wrapper">
             <div className="login-image-wrapper">
@@ -103,7 +119,12 @@ function LoginPage() {
                         <button className="demouser" onClick={loginDemoUser}>
                             <span>Continue with Demo User</span>
                         </button>
+                        <div className="google-login" onClick={loginThroughGoogle}>
+                            <img className="btn-auth-img" src={googleButton} alt='google sign in' />
+                        </div>
                     </div>
+
+
                 </div>
             </div>
         </div>

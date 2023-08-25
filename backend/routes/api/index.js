@@ -5,12 +5,13 @@ const portfoliosRouter = require('./portfolios.js');
 const watchlistsRouter = require('./watchlists.js');
 const ordersRouter = require('./orders.js');
 const transactionsRouter = require('./transactions.js');
-const { restoreUser } = require("../../utils/auth.js");
+const { restoreUser, restoreGoogleUser } = require("../../utils/auth.js");
 
 // Connect restoreUser middleware to the API router
   // If current user session is valid, set req.user to the user in the database
   // If current user session is not valid, set req.user to null
 router.use(restoreUser);
+router.use(restoreGoogleUser);
 
 router.use('/session', sessionRouter);
 router.use('/users', usersRouter);

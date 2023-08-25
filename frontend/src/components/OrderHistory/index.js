@@ -36,10 +36,10 @@ function OrderHistory({ isLoaded }) {
                     <h1>{user?.firstName}</h1>
                     <div className="history-title-tab">
                         <div
-                            className={showOrders ? "active" : ""}
+                            className={showOrders ? "active1" : ""}
                             onClick={handleClickOrders}>Orders</div>
                         <div
-                            className={showOrders ? "" : "active"}
+                            className={showOrders ? "" : "active1"}
                             onClick={handleClickTransfers}>Transfers</div>
                     </div>
                 </div>
